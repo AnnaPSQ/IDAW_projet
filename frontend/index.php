@@ -1,0 +1,3 @@
+<?php
+// affiche un dashboard
+?>
