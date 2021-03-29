@@ -6,7 +6,7 @@
                 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
 
-                $ratio = $dbco->prepare("SELECT ratio FROM aliments JOIN a_pour_apport ON aliments.id_aliments = a_pour_apport.id_aliments");
+                $ratio = $dbco->prepare("SELECT ratio FROM aliments JOIN a_pour_apport ON aliments.id_aliments = a_pour_apport.id_aliments ORDER BY aliments.id_aliments ASC");
                 $ratio->execute();
 
                 $nom = $dbco->prepare("SELECT * FROM aliments ");
@@ -19,13 +19,13 @@
                 $increment = 0;
                 foreach($resultatnom as $numbers => $informationsNom){
                     echo "<tr> <td> 
-                    $informationsNom['Nom'] </td> <td> 
-                    $informationsNom['Type']  </td>";
-                    for ($i = 0, i< 11, $i++){
+                    $informationsNom[Nom] </td> <td> 
+                    $informationsNom[Type]  </td>";
+                    for ($i = 0; $i< 11; $i++){
                         $numero = 11*$increment + $i;
-                        echo "<td> $resultatratio[$numero] </td>";
+                        echo "<td>". $resultatratio[$numero]['ratio'] ."</td>";
                         }
-                    echo "</td> <td>  <button onclick=\"edit(${newFood.id})\" style=\"color:blue\">Edit</button>  <button onclick=\"remove(${newFood.id})\" style=\"color:blue\">Remove</button> </td> </tr>";
+                    echo "</td> <td>  <button onclick=\"edit($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Edit</button>  <button onclick=\"remove($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Remove</button> </td> </tr>";
                     $increment++;
                     }
                 }
