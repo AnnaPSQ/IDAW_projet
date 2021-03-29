@@ -11,11 +11,7 @@
                 die('Erreur : ' .$mysqli->connect_error);
             }
 
-            $services = $mysqli->query("SELECT * FROM aliments");
-
-            if($services && $services->num_rows>0){
-                $services->fetch_all(MYSQLI_ASSOC);
-            }
+           
             
 
 ?>

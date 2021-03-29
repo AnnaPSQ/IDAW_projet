@@ -27,7 +27,7 @@
             </tbody>
         </table>
 
-        <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off">
+        <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
             <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
             <p>Type <br> <input type="text" id="IDtype" name="prenom"></p>
             <p>Energie <br> <input type="text" id="IDenergie" name="date"> </p>
