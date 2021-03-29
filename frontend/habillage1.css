@@ -109,3 +109,30 @@ p{
 h3{
     color:white;
 }
+
+.tableau-formulaire{
+    border-collapse: collapse;
+    width: auto;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.2);
+    cursor: pointer;
+    margin: 100px auto;
+    border: 2px solid slategray;
+}
+
+thead tr{
+    background-color: rgb(2, 20, 37);
+    color: #fff;
+    text-align: center;
+}
+
+th, td{
+    padding: 15px 20px;
+}
+
+tbody tr:nth-child(even){
+    background-color: #f3f3f3;
+}
+
+tbody tr:nth-child(odd){
+    background-color: slategray;
+}
