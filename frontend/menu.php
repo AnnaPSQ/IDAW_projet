@@ -7,7 +7,7 @@
         'index' => array('Accueil', 'Welcome'),
         'aliments' =>  array('Aliments', 'Food'),
         'journal' => array('Journal', 'Journal'),
-        'config' => array('Configurations', 'Configurations'),
+        'CRUD' => array('CRUD', 'CRUD'),
         'profil' => array('¨Profil', 'Profil')
     );
 

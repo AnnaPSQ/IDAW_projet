@@ -1,15 +1,22 @@
         <div class="conteneur-flexible ligne ">
-            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Configurations <h2> </center>  
+            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> CRUD <h2> </center>  
             
             <table class = "tableau-formulaire">
             <thead>
                 <tr>
-                    <th>Nom </th>
-                    <th>Prenom </th>
-                    <th>Date de naissance </th>
-                    <th>Message </th>
-                    <th>Adore le cours </th>
-                    <th>CRUD</th>
+                    <th>Nom de l'aliment </th>
+                    <th>Type </th>
+                    <th>Energie (kcal/100g) </th>
+                    <th>Protéines (g/100g) </th>
+                    <th>Glucides (g/100g) </th>
+                    <th>Lipides (g/100g)</th>
+                    <th>Cholestérol (g/100g)</th>
+                    <th>Calcium (g/100g)</th>
+                    <th>Fer (g/100g)</th>
+                    <th>Magnésium (g/100g)</th>
+                    <th>Phosphore (g/100g)</th>
+                    <th>Potassium (g/100g)</th>
+                    <th>Sodium (g/100g)</th>
                 </tr>
             </thead>
 
@@ -19,11 +26,19 @@
         </table>
 
         <form id="AddStudentForm" onsubmit="onFormSubmit();" autocomplete="off">
-            <p>Aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
-            <p>Type <br> <input type="text" id="IDprenom" name="prenom"></p>
-            <p>Date de naissance <br> <input type="date" id="IDdate" name="date"> </p>
-            <p>Message: <br><textarea id="IDmessage" name="message"></textarea></p>
-            <input type="checkbox" id="Adore" name="question"> <label for="Adore">Adorez-vous le cours?</label>
+            <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
+            <p>Type <br> <input type="text" id="IDtype" name="prenom"></p>
+            <p>Energie <br> <input type="text" id="IDenergie" name="date"> </p>
+            <p>Protéines <br> <input type="text" id="IDproteines" name="date"> </p>
+            <p>Glucides <br> <input type="text" id="IDglucides" name="date"> </p>
+            <p>Lipides <br> <input type="text" id="IDlipides" name="date"> </p>
+            <p>Cholestérol <br> <input type="text" id="IDcholesterol" name="date"> </p>
+            <p>Calicum <br> <input type="text" id="IDcalcium" name="date"> </p>
+            <p>Fer <br> <input type="text" id="IDfer" name="date"> </p>
+            <p>Magnésium <br> <input type="text" id="IDmagnesium" name="date"> </p>
+            <p>Phosphore <br> <input type="text" id="IDphosphore" name="date"> </p>
+            <p>Potassium <br> <input type="text" id="IDpotassium" name="date"> </p>
+            <p>Sodium <br> <input type="text" id="IDsodium" name="date"> </p>
             <p><button type="submit">Submit</button></p>
         </form>
 
@@ -98,7 +113,8 @@
                         ${newStudent.message}  </td> <td> 
                         ${newStudent.aimeCours}
                         </td> <td> <button onclick="edit(${newStudent.id})" style="color:blue">Edit</button>  <button onclick="remove(${newStudent.id})" style="color:blue">Remove</button> </td> </tr>`);
-                        onForm("","","","","");         
+                        onForm("","","","","");
+                        addAliment()         
                     }
                 }
                 else{
