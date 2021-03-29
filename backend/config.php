@@ -4,11 +4,14 @@
             $password = '';
             
             //On établit la connexion
-            $conn = new mysqli($servername, $username, $password);
+            $mysqli = new mysqli($servername, $username, $password);
             
             //On vérifie la connexion
-            if($conn->connect_error){
-                die('Erreur : ' .$conn->connect_error);
+            if($mysqli->connect_error){
+                die('Erreur : ' .$mysqli->connect_error);
             }
-            
+
+            $table_aliments = mysqli_query($mysqli, "SELECT * FROM aliments");
+            printf("Select returned %d rows.\n", mysqli_num_rows($table_aliments));
+
 ?>
