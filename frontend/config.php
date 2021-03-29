@@ -1,5 +1,5 @@
         <div class="conteneur-flexible ligne ">
-            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Accueil <h2> </center>  
+            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Configurations <h2> </center>  
             
             <table class = "tableau-formulaire">
             <thead>
@@ -19,8 +19,8 @@
         </table>
 
         <form id="AddStudentForm" onsubmit="onFormSubmit();" autocomplete="off">
-            <p>Nom* <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
-            <p>Prenom <br> <input type="text" id="IDprenom" name="prenom"></p>
+            <p>Aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
+            <p>Type <br> <input type="text" id="IDprenom" name="prenom"></p>
             <p>Date de naissance <br> <input type="date" id="IDdate" name="date"> </p>
             <p>Message: <br><textarea id="IDmessage" name="message"></textarea></p>
             <input type="checkbox" id="Adore" name="question"> <label for="Adore">Adorez-vous le cours?</label>
@@ -57,6 +57,8 @@
                 students.splice(id,1);
                 $("#student-"+id).empty();
             }
+            
+    
 
             function onFormSubmit(){
                 event.preventDefault();
@@ -83,6 +85,7 @@
                         ${newStudent.aimeCours}
                         </td> <td> <button onclick="edit(${newStudent.id})" style="color:blue">Edit</button>  <button onclick="remove(${newStudent.id})" style="color:blue">Remove</button> </td>`);
                         currentEditedStudentId = -1;
+                        onForm("","","","","");
                     }
                     else{
                         newStudent.id = currentMaxId;
@@ -94,7 +97,8 @@
                         ${newStudent.date}  </td>  <td> 
                         ${newStudent.message}  </td> <td> 
                         ${newStudent.aimeCours}
-                        </td> <td> <button onclick="edit(${newStudent.id})" style="color:blue">Edit</button>  <button onclick="remove(${newStudent.id})" style="color:blue">Remove</button> </td> </tr>`);         
+                        </td> <td> <button onclick="edit(${newStudent.id})" style="color:blue">Edit</button>  <button onclick="remove(${newStudent.id})" style="color:blue">Remove</button> </td> </tr>`);
+                        onForm("","","","","");         
                     }
                 }
                 else{
@@ -103,7 +107,7 @@
             }
 
 
-            onForm('','','','','');
+            
         </script>
             </div>
         </div>        
