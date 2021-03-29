@@ -1,21 +1,40 @@
 <?php
-            $servername = 'localhost';
-            $username = 'root';
-            $password = '';
+            $servname = "localhost"; $dbname = "projetidaw"; $user = "root"; $pass = "";
             
-            //On établit la connexion
-            $mysqli = new mysqli($servername, $username, $password);
-            
-            //On vérifie la connexion
-            if($mysqli->connect_error){
-                die('Erreur : ' .$mysqli->connect_error);
+            try{
+                $dbco = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8", $user, $pass);
+                $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                
+
+                $ratio = $dbco->prepare("SELECT ratio FROM aliments JOIN a_pour_apport ON aliments.id_aliments = a_pour_apport.id_aliments");
+                $ratio->execute();
+
+                $nom = $dbco->prepare("SELECT * FROM aliments ");
+                $nom->execute();
+                
+
+                $resultatratio = $ratio->fetchAll(PDO::FETCH_ASSOC);
+                $resultatnom = $nom->fetchAll(PDO::FETCH_ASSOC);
+
+                $increment = 0;
+                foreach($resultatnom as $numbers => $informationsNom){
+                    echo "<tr> <td> 
+                    $informationsNom['Nom'] </td> <td> 
+                    $informationsNom['Type']  </td>";
+                    for ($i = 0, i< 11, $i++){
+                        $numero = 11*$increment + $i;
+                        echo "<td> $resultatratio[$numero] </td>";
+                        }
+                    echo "</td> <td>  <button onclick=\"edit(${newFood.id})\" style=\"color:blue\">Edit</button>  <button onclick=\"remove(${newFood.id})\" style=\"color:blue\">Remove</button> </td> </tr>";
+                    $increment++;
+                    }
+                }
+                
+            catch(PDOException $e){
+                echo "Erreur : " . $e->getMessage();
             }
 
-            $services = $mysqli->query("SELECT * FROM aliments JOIN a_pour_apport ON aliments.id_aliment = a_pour_apport");
-
-            if($services && $services->num_rows>0){
-                $services->fetch_all(MYSQLI_ASSOC);
-            }
             
-
 ?>
+
+
