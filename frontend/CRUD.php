@@ -23,29 +23,41 @@
             <tbody id="table-content">
                 <?php
                     require_once("../backend/afficheAliment.php");
+                    $increment = 0;
+                    foreach($resultatnom as $numbers => $informationsNom){
+                        echo "<tr id=aliments-$increment> <td> 
+                        $informationsNom[Nom] </td> <td> 
+                        $informationsNom[Type]  </td>";
+                        for ($i = 0; $i< 11; $i++){
+                            $numero = 11*$increment + $i;
+                            echo "<td>". $resultatratio[$numero]['ratio'] ."</td>";
+                            }
+                        echo "</td> <td>  <button onclick=\"edit($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Edit</button>  <button onclick=\"remove($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Remove</button> </td> </tr>";
+                        $increment++;
+                    }
                 ?>
             </tbody>
         </table>
 
         <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
             <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
-            <p>Type <br> <input type="text" id="IDtype" name="prenom"></p>
-            <p>Energie <br> <input type="text" id="IDenergie" name="date"> </p>
-            <p>Protéines <br> <input type="text" id="IDproteines" name="date"> </p>
-            <p>Glucides <br> <input type="text" id="IDglucides" name="date"> </p>
-            <p>Lipides <br> <input type="text" id="IDlipides" name="date"> </p>
-            <p>Cholestérol <br> <input type="text" id="IDcholesterol" name="date"> </p>
-            <p>Calcium <br> <input type="text" id="IDcalcium" name="date"> </p>
-            <p>Fer <br> <input type="text" id="IDfer" name="date"> </p>
-            <p>Magnésium <br> <input type="text" id="IDmagnesium" name="date"> </p>
-            <p>Phosphore <br> <input type="text" id="IDphosphore" name="date"> </p>
-            <p>Potassium <br> <input type="text" id="IDpotassium" name="date"> </p>
-            <p>Sodium <br> <input type="text" id="IDsodium" name="date"> </p>
+            <p>Type <br> <input type="text" id="IDtype" name="type"></p>
+            <p>Energie <br> <input type="text" id="IDenergie" name="energie"> </p>
+            <p>Protéines <br> <input type="text" id="IDproteines" name="proteines"> </p>
+            <p>Glucides <br> <input type="text" id="IDglucides" name="glucides"> </p>
+            <p>Lipides <br> <input type="text" id="IDlipides" name="lipides"> </p>
+            <p>Cholestérol <br> <input type="text" id="IDcholesterol" name="cholesterol"> </p>
+            <p>Calcium <br> <input type="text" id="IDcalcium" name="calcium"> </p>
+            <p>Fer <br> <input type="text" id="IDfer" name="fer"> </p>
+            <p>Magnésium <br> <input type="text" id="IDmagnesium" name="magnesium"> </p>
+            <p>Phosphore <br> <input type="text" id="IDphosphore" name="phosphore"> </p>
+            <p>Potassium <br> <input type="text" id="IDpotassium" name="potassium"> </p>
+            <p>Sodium <br> <input type="text" id="IDsodium" name="sodium"> </p>
             <p><button type="submit">Submit</button></p>
         </form>
 
         <script>
-            let currentMaxId = 0;
+            var currentMaxId = <?php echo json_encode($increment); ?>; 
             let aliments = [];
             let currentEditedFoodId =-1;
 
@@ -153,8 +165,8 @@
                         ${newFood.phosphore}  </td> <td> 
                         ${newFood.potassium}  </td> <td> 
                         ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
-                        onForm("","","","","","","","","","","","","");
-                        addAliment()         
+                        onForm("","","","","","","","","","","","","");    
+                        <?php require_once("../backend/addAliment.php"); ?>;     
                     }
                 }
                 else{

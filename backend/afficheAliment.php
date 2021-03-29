@@ -16,20 +16,7 @@
                 $resultatratio = $ratio->fetchAll(PDO::FETCH_ASSOC);
                 $resultatnom = $nom->fetchAll(PDO::FETCH_ASSOC);
 
-                $increment = 0;
-                foreach($resultatnom as $numbers => $informationsNom){
-                    echo "<tr> <td> 
-                    $informationsNom[Nom] </td> <td> 
-                    $informationsNom[Type]  </td>";
-                    for ($i = 0; $i< 11; $i++){
-                        $numero = 11*$increment + $i;
-                        echo "<td>". $resultatratio[$numero]['ratio'] ."</td>";
-                        }
-                    echo "</td> <td>  <button onclick=\"edit($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Edit</button>  <button onclick=\"remove($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Remove</button> </td> </tr>";
-                    $increment++;
-                    }
-                }
-                
+            }
             catch(PDOException $e){
                 echo "Erreur : " . $e->getMessage();
             }
