@@ -32,7 +32,12 @@
                             $numero = 11*$increment + $i;
                             echo "<td>". $resultatratio[$numero]['ratio'] ."</td>";
                             }
-                        echo "</td> <td>  <button onclick=\"edit($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Edit</button>  <button onclick=\"remove($informationsNom[ID_aliments]-1)\" style=\"color:blue\">Remove</button> </td> </tr>";
+                        echo '</td> <td>  <button onclick=edit(';
+                        echo $informationsNom['ID_aliments']-1;
+                        echo ') style=color:blue>Edit</button> 
+                                          <button onclick=remove(';
+                        echo $informationsNom['ID_aliments']-1;
+                        echo') style="color:blue">Remove</button> </td> </tr>';
                         $increment++;
                     }
                 ?>
@@ -61,6 +66,24 @@
             let aliments = [];
             let currentEditedFoodId =-1;
 
+            $.ajax({
+                    //L'URL de la requête 
+                    url: "../backend/addAliment.php",
+
+                    //La méthode d'envoi (type de requête)
+                    method: "POST",
+
+                    //Le format de réponse attendu
+                    dataType : "json",
+                    data : "{}"
+                })
+                //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                /*On peut par exemple convertir cette réponse en chaine JSON et insérer
+                * cette chaine dans un div id="res"*/
+                .done(function(response){
+                    let data = JSON.stringify(response);
+                    console.log(data);
+                });
 
 
             function onForm(nom,type,energie,proteines,glucides, lipides, cholestérol, calcium, fer, magnesium, phosphore, potassium, sodium){
@@ -165,8 +188,7 @@
                         ${newFood.phosphore}  </td> <td> 
                         ${newFood.potassium}  </td> <td> 
                         ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
-                        onForm("","","","","","","","","","","","","");    
-                        <?php require_once("../backend/addAliment.php"); ?>;     
+                        onForm("","","","","","","","","","","","","");
                     }
                 }
                 else{
