@@ -10,6 +10,7 @@
                     <th>Protéines (g/100g) </th>
                     <th>Glucides (g/100g) </th>
                     <th>Lipides (g/100g)</th>
+                    <th>Sucres (g/100g) </th>
                     <th>Cholestérol (g/100g)</th>
                     <th>Calcium (g/100g)</th>
                     <th>Fer (g/100g)</th>
@@ -28,22 +29,23 @@
         <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
             <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
             <p>Type <br> <input type="text" id="IDtype" name="type"></p>
-            <p>Energie <br> <input type="text" id="IDenergie" name="energie"> </p>
-            <p>Protéines <br> <input type="text" id="IDproteines" name="proteines"> </p>
-            <p>Glucides <br> <input type="text" id="IDglucides" name="glucides"> </p>
-            <p>Lipides <br> <input type="text" id="IDlipides" name="lipides"> </p>
-            <p>Cholestérol <br> <input type="text" id="IDcholesterol" name="cholesterol"> </p>
-            <p>Calcium <br> <input type="text" id="IDcalcium" name="calcium"> </p>
-            <p>Fer <br> <input type="text" id="IDfer" name="fer"> </p>
-            <p>Magnésium <br> <input type="text" id="IDmagnesium" name="magnesium"> </p>
-            <p>Phosphore <br> <input type="text" id="IDphosphore" name="phosphore"> </p>
-            <p>Potassium <br> <input type="text" id="IDpotassium" name="potassium"> </p>
-            <p>Sodium <br> <input type="text" id="IDsodium" name="sodium"> </p>
+            <p>Energie (de type decimal: x.y) <br> <input type="text" id="IDenergie" name="energie"> </p>
+            <p>Protéines (de type decimal: x.y) <br> <input type="text" id="IDproteines" name="proteines"> </p>
+            <p>Glucides (de type decimal: x.y) <br> <input type="text" id="IDglucides" name="glucides"> </p>
+            <p>Lipides (de type decimal: x.y) <br> <input type="text" id="IDlipides" name="lipides"> </p>
+            <p>Sucres (de type decimal: x.y) <br> <input type="text" id="IDsucres" name="sucres"> </p>
+            <p>Cholestérol (de type decimal: x.y) <br> <input type="text" id="IDcholesterol" name="cholesterol"> </p>
+            <p>Calcium (de type decimal: x.y) <br> <input type="text" id="IDcalcium" name="calcium"> </p>
+            <p>Fer (de type decimal: x.y) <br> <input type="text" id="IDfer" name="fer"> </p>
+            <p>Magnésium (de type decimal: x.y) <br> <input type="text" id="IDmagnesium" name="magnesium"> </p>
+            <p>Phosphore (de type decimal: x.y) <br> <input type="text" id="IDphosphore" name="phosphore"> </p>
+            <p>Potassium (de type decimal: x.y) <br> <input type="text" id="IDpotassium" name="potassium"> </p>
+            <p>Sodium (de type decimal: x.y) <br> <input type="text" id="IDsodium" name="sodium"> </p>
             <p><button type="submit">Submit</button></p>
         </form>
 
         <script>
-            let currentMaxId = -1; 
+            let currentMaxId = 0; 
             let aliments = [];
             let currentEditedFoodId =-1;
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
@@ -56,17 +58,18 @@
                         aliment.id = a.ID_aliments;
                         aliment.nom = a.Nom;
                         aliment.type = a.Type; 
-                        aliment.energie = '';
-                        aliment.proteines = '';
-                        aliment.glucides = '';
-                        aliment.lipides = '';
-                        aliment.cholesterol = '';  
-                        aliment.calcium = '';
-                        aliment.fer = '';
-                        aliment.magnesium = '';
-                        aliment.phosphore = '';
-                        aliment.potassium = '';
-                        aliment.sodium = '';
+                        aliment.energie = a.Energie;
+                        aliment.proteines = a.Proteines;
+                        aliment.glucides = a.Glucides;
+                        aliment.lipides = a.Lipides;
+                        aliment.sucres = a.Sucres;
+                        aliment.cholesterol = a.Cholesterol;
+                        aliment.calcium = a.Calcium;
+                        aliment.fer = a.Fer;
+                        aliment.magnesium = a.Magnesium;
+                        aliment.phosphore = a.Phosphore;
+                        aliment.potassium = a.Potassium;
+                        aliment.sodium = a.Sodium;
                         ajouteAliment(aliment);
                     });
                 });
@@ -95,15 +98,36 @@
                     });
             }
             
+            function AjaxChangeAliment(aliment){
+                $.ajax({
+                        //L'URL de la requête 
+                        url: urlBackendPrefix+"editAliment.php",
 
-            function onForm(nom,type,energie,proteines,glucides, lipides, cholestérol, calcium, fer, magnesium, phosphore, potassium, sodium){
+                        //La méthode d'envoi (type de requête)
+                        method: "POST",
+
+                        //Le format de réponse attendu
+                        dataType : "json",
+                        data : aliment
+                    })
+                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
+                    * cette chaine dans un div id="res"*/
+                    .always(function(response){
+                        //let data = JSON.stringify(response);
+                        console.log(response);
+                    });
+            }
+
+            function onForm(nom,type,energie,proteines,glucides, lipides, sucres, cholesterol, calcium, fer, magnesium, phosphore, potassium, sodium){
                 $("#IDnom").val(nom);
                 $("#IDtype").val(type);
                 $("#IDenergie").val(energie);
                 $("#IDproteines").val(proteines);
                 $("#IDglucides").val(glucides);
                 $("#IDlipides").val(lipides);
-                $("#IDcholestrerol").val(cholestérol);
+                $("#IDsucres").val(sucres);
+                $("#IDcholesterol").val(cholesterol);
                 $("#IDcalcium").val(calcium);
                 $("#IDfer").val(fer);
                 $("#IDmagnesium").val(magnesium);
@@ -115,19 +139,20 @@
 
             function edit(id){
                 currentEditedFoodId = id;
-                onForm(aliments[currentEditedFoodId].nom,
-                        aliments[currentEditedFoodId].type,
-                        aliments[currentEditedFoodId].energie,
-                        aliments[currentEditedFoodId].proteines,
-                        aliments[currentEditedFoodId].glucides,
-                        aliments[currentEditedFoodId].lipides,
-                        aliments[currentEditedFoodId].cholesterol,
-                        aliments[currentEditedFoodId].calcium,
-                        aliments[currentEditedFoodId].fer,
-                        aliments[currentEditedFoodId].magnesium,
-                        aliments[currentEditedFoodId].phosphore,
-                        aliments[currentEditedFoodId].potassium,
-                        aliments[currentEditedFoodId].sodium,
+                onForm(aliments[currentEditedFoodId].Nom,
+                        aliments[currentEditedFoodId].Type,
+                        aliments[currentEditedFoodId].Energie,
+                        aliments[currentEditedFoodId].Proteines,
+                        aliments[currentEditedFoodId].Glucides,
+                        aliments[currentEditedFoodId].Lipides,
+                        aliments[currentEditedFoodId].Sucres,
+                        aliments[currentEditedFoodId].Cholesterol,
+                        aliments[currentEditedFoodId].Calcium,
+                        aliments[currentEditedFoodId].Fer,
+                        aliments[currentEditedFoodId].Magnesium,
+                        aliments[currentEditedFoodId].Phosphore,
+                        aliments[currentEditedFoodId].Potassium,
+                        aliments[currentEditedFoodId].Sodium,
 
                     );
 
@@ -149,7 +174,8 @@
                 newFood.proteines = $("#IDproteines").val();
                 newFood.glucides = $("#IDglucides").val();
                 newFood.lipides = $("#IDlipides").val();
-                newFood.cholestrérol = $("#IDcholestrerol").val();
+                newFood.sucres = $("#IDsucres").val();
+                newFood.cholesterol = $("#IDcholesterol").val();
                 newFood.calcium = $("#IDcalcium").val();
                 newFood.fer = $("#IDfer").val();
                 newFood.magnesium = $("#IDmagnesium").val();
@@ -159,33 +185,16 @@
                 $("p").remove("#contenu-removable");
                 if (newFood.nom != ''){
                     if (currentEditedFoodId >= 0){
-                        newFood.id = currentEditedFoodId;
-                        aliments[newFood.id] = newFood;
-                        $("#aliments-"+newFood.id).empty();
-                        $("#aliments-"+newFood.id).append(`<td> ${newFood.nom}  </td> <td> 
-                        ${newFood.type}  </td> <td> 
-                        ${newFood.energie}  </td> <td> 
-                        ${newFood.proteines}  </td> <td> 
-                        ${newFood.glucides} </td> <td>
-                        ${newFood.lipides}  </td> <td> 
-                        ${newFood.cholesterol}  </td> <td> 
-                        ${newFood.calcium}  </td> <td> 
-                        ${newFood.fer}  </td> <td> 
-                        ${newFood.magnesium}  </td> <td> 
-                        ${newFood.phosphore}  </td> <td> 
-                        ${newFood.potassium}  </td> <td> 
-                        ${newFood.sodium}  </td> <td> 
-                        <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td>`);
+                        editAliment(newFood);
+                        AjaxChangeAliment();
                         currentFoodId = -1;
-                        onForm("","","","","","","","","","","","","");
+                        onForm("","","","","","","","","","","","","","");
                     }
                     else{
-                        newFood.id = currentMaxId;
-                        currentMaxId++;
                         aliments.push(newFood);
                         ajouteAliment(newFood);
                         AjaxEnvoieAliment(newFood);
-                        onForm("","","","","","","","","","","","","");
+                        onForm("","","","","","","","","","","","","","");
                     }
                 }
                 else{
@@ -196,6 +205,7 @@
             
 
             function ajouteAliment(newFood){
+                newFood.id = currentMaxId;
                 $("#table-content").append
                         (`<tr id=aliments-${newFood.id}> 
                         <td> ${newFood.nom}  </td> <td> 
@@ -204,6 +214,7 @@
                         ${newFood.proteines}  </td> <td> 
                         ${newFood.glucides} </td> <td>
                         ${newFood.lipides}  </td> <td> 
+                        ${newFood.sucres}  </td> <td> 
                         ${newFood.cholesterol}  </td> <td> 
                         ${newFood.calcium}  </td> <td> 
                         ${newFood.fer}  </td> <td> 
@@ -211,6 +222,28 @@
                         ${newFood.phosphore}  </td> <td> 
                         ${newFood.potassium}  </td> <td> 
                         ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
+                currentMaxId++;
+            }
+
+            function editAliment(newFood){
+                newFood.id = currentEditedFoodId;
+                aliments[newFood.id] = newFood;
+                $("#aliments-"+newFood.id).empty();
+                $("#aliments-"+newFood.id).append(`<td> ${newFood.nom}  </td> <td> 
+                        ${newFood.type}  </td> <td> 
+                        ${newFood.energie}  </td> <td> 
+                        ${newFood.proteines}  </td> <td> 
+                        ${newFood.glucides} </td> <td>
+                        ${newFood.lipides}  </td> <td> 
+                        ${newFood.sucres}  </td> <td> 
+                        ${newFood.cholesterol}  </td> <td> 
+                        ${newFood.calcium}  </td> <td> 
+                        ${newFood.fer}  </td> <td> 
+                        ${newFood.magnesium}  </td> <td> 
+                        ${newFood.phosphore}  </td> <td> 
+                        ${newFood.potassium}  </td> <td> 
+                        ${newFood.sodium}  </td> <td> 
+                        <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td>`);
             }
 
             
