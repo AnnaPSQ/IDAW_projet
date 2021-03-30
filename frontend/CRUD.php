@@ -21,26 +21,7 @@
             </thead>
 
             <tbody id="table-content">
-                <?php
-                    require_once("../backend/afficheAliment.php");
-                    $increment = 0;
-                    foreach($resultatnom as $numbers => $informationsNom){
-                        echo "<tr id=aliments-$increment> <td> 
-                        $informationsNom[Nom] </td> <td> 
-                        $informationsNom[Type]  </td>";
-                        for ($i = 0; $i< 11; $i++){
-                            $numero = 11*$increment + $i;
-                            echo "<td>". $resultatratio[$numero]['ratio'] ."</td>";
-                            }
-                        echo '</td> <td>  <button onclick=edit(';
-                        echo $informationsNom['ID_aliments']-1;
-                        echo ') style=color:blue>Edit</button> 
-                                          <button onclick=remove(';
-                        echo $informationsNom['ID_aliments']-1;
-                        echo') style="color:blue">Remove</button> </td> </tr>';
-                        $increment++;
-                    }
-                ?>
+
             </tbody>
         </table>
 
@@ -62,29 +43,58 @@
         </form>
 
         <script>
-            var currentMaxId = <?php echo json_encode($increment); ?>; 
+            let currentMaxId = -1; 
             let aliments = [];
             let currentEditedFoodId =-1;
-
-            $.ajax({
-                    //L'URL de la requête 
-                    url: "../backend/addAliment.php",
-
-                    //La méthode d'envoi (type de requête)
-                    method: "POST",
-
-                    //Le format de réponse attendu
-                    dataType : "json",
-                    data : "{}"
-                })
-                //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                * cette chaine dans un div id="res"*/
-                .done(function(response){
-                    let data = JSON.stringify(response);
-                    console.log(data);
+            let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
+            
+            $(document).ready(function(){
+                $.getJSON(urlBackendPrefix+"afficheAliment.php", function(data){ 
+                    aliments = data;
+                    $.each(aliments, function(i, a){
+                        let aliment = {};
+                        aliment.id = a.ID_aliments;
+                        aliment.nom = a.Nom;
+                        aliment.type = a.Type; 
+                        aliment.energie = '';
+                        aliment.proteines = '';
+                        aliment.glucides = '';
+                        aliment.lipides = '';
+                        aliment.cholesterol = '';  
+                        aliment.calcium = '';
+                        aliment.fer = '';
+                        aliment.magnesium = '';
+                        aliment.phosphore = '';
+                        aliment.potassium = '';
+                        aliment.sodium = '';
+                        ajouteAliment(aliment);
+                    });
                 });
+            });
 
+
+
+            function AjaxEnvoieAliment(aliment){
+                $.ajax({
+                        //L'URL de la requête 
+                        url: urlBackendPrefix+"addAliment.php",
+
+                        //La méthode d'envoi (type de requête)
+                        method: "POST",
+
+                        //Le format de réponse attendu
+                        dataType : "json",
+                        data : aliment
+                    })
+                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
+                    * cette chaine dans un div id="res"*/
+                    .always(function(response){
+                        //let data = JSON.stringify(response);
+                        console.log(response);
+                    });
+            }
+            
 
             function onForm(nom,type,energie,proteines,glucides, lipides, cholestérol, calcium, fer, magnesium, phosphore, potassium, sodium){
                 $("#IDnom").val(nom);
@@ -173,7 +183,20 @@
                         newFood.id = currentMaxId;
                         currentMaxId++;
                         aliments.push(newFood);
-                        $("#table-content").append
+                        ajouteAliment(newFood);
+                        AjaxEnvoieAliment(newFood);
+                        onForm("","","","","","","","","","","","","");
+                    }
+                }
+                else{
+                    $("#contenu-nom").before("<p id=\"contenu-removable\" style=\"color:red\"> Ce champ doit être renseigné </p>");
+                }
+            }
+            
+            
+
+            function ajouteAliment(newFood){
+                $("#table-content").append
                         (`<tr id=aliments-${newFood.id}> 
                         <td> ${newFood.nom}  </td> <td> 
                         ${newFood.type}  </td> <td> 
@@ -188,14 +211,7 @@
                         ${newFood.phosphore}  </td> <td> 
                         ${newFood.potassium}  </td> <td> 
                         ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
-                        onForm("","","","","","","","","","","","","");
-                    }
-                }
-                else{
-                    $("#contenu-nom").before("<p id=\"contenu-removable\" style=\"color:red\"> Ce champ doit être renseigné </p>");
-                }
             }
-
 
             
         </script>

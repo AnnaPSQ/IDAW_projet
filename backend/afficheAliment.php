@@ -15,7 +15,7 @@
 
                 $resultatratio = $ratio->fetchAll(PDO::FETCH_ASSOC);
                 $resultatnom = $nom->fetchAll(PDO::FETCH_ASSOC);
-
+                echo json_encode($resultatnom);
             }
             catch(PDOException $e){
                 echo "Erreur : " . $e->getMessage();
