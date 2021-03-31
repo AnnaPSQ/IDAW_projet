@@ -5,7 +5,7 @@
     $mymenu = array(
         // idPage titre
         'index' => array('Accueil', 'Welcome'),
-        'aliments' =>  array('Aliments', 'Food'),
+        'aliments' =>  array('Repas', 'Meal'),
         'journal' => array('Journal', 'Journal'),
         'CRUD' => array('CRUD', 'CRUD'),
         'profil' => array('¨Profil', 'Profil')
