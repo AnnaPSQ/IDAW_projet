@@ -110,32 +110,6 @@
                 $("#IDquantite4").val(quantite4);
 
             }
-
-            // function edit(id){
-            //     currentEditedFoodId = id;
-            //     onForm(aliments[currentEditedFoodId].Nom,
-            //             aliments[currentEditedFoodId].Type,
-            //             aliments[currentEditedFoodId].Energie,
-            //             aliments[currentEditedFoodId].Proteines,
-            //             aliments[currentEditedFoodId].Glucides,
-            //             aliments[currentEditedFoodId].Lipides,
-            //             aliments[currentEditedFoodId].Sucres,
-            //             aliments[currentEditedFoodId].Cholesterol,
-            //             aliments[currentEditedFoodId].Calcium,
-            //             aliments[currentEditedFoodId].Fer,
-            //             aliments[currentEditedFoodId].Magnesium,
-            //             aliments[currentEditedFoodId].Phosphore,
-            //             aliments[currentEditedFoodId].Potassium,
-            //             aliments[currentEditedFoodId].Sodium,
-
-            //         );
-
-            }
-
-            // function remove(id){
-            //     aliments.splice(id,1);
-            //     $("#aliments-"+id).empty();
-            // }
             
     
 
@@ -159,12 +133,6 @@
                 $("p").remove("#contenu-removable");
                 if (newFood.nom != ''){
                     if (currentEditedFoodId >= 0){
-                        editAliment(newFood);
-                        AjaxChangeAliment();
-                        currentFoodId = -1;
-                        onForm("","","","","","","","","","","","","","");
-                    }
-                    else{
                         aliments.push(newFood);
                         ajouteAliment(newFood);
                         AjaxEnvoieAliment(newFood);
