@@ -26,7 +26,7 @@
             </tbody>
         </table>
 
-        <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
+        <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off">
             <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
             <p>Type <br> <input type="text" id="IDtype" name="type"></p>
             <p>Energie (de type decimal: x.y) <br> <input type="text" id="IDenergie" name="energie"> </p>
@@ -45,7 +45,7 @@
         </form>
 
         <script>
-            let currentMaxId = 0; 
+            let currentMaxId = 1; 
             let aliments = [];
             let currentEditedFoodId =-1;
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
@@ -55,7 +55,6 @@
                     aliments = data;
                     $.each(aliments, function(i, a){
                         let aliment = {};
-                        aliment.id = a.ID_aliments;
                         aliment.nom = a.Nom;
                         aliment.type = a.Type; 
                         aliment.energie = a.Energie;
@@ -74,8 +73,7 @@
                     });
                 });
             });
-
-
+ 
 
             function AjaxEnvoieAliment(aliment){
                 $.ajax({
@@ -119,6 +117,27 @@
                     });
             }
 
+            function AjaxSupprimeAliment(id){
+                $.ajax({
+                        //L'URL de la requête 
+                        url: urlBackendPrefix+"deleteAliment.php",
+
+                        //La méthode d'envoi (type de requête)
+                        method: "POST",
+
+                        //Le format de réponse attendu
+                        dataType : "json",
+                        data : {'id': id}
+                    })
+                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
+                    * cette chaine dans un div id="res"*/
+                    .always(function(response){
+                        //let data = JSON.stringify(response);
+                        console.log(response);
+                    });
+            }
+
             function onForm(nom,type,energie,proteines,glucides, lipides, sucres, cholesterol, calcium, fer, magnesium, phosphore, potassium, sodium){
                 $("#IDnom").val(nom);
                 $("#IDtype").val(type);
@@ -139,28 +158,30 @@
 
             function edit(id){
                 currentEditedFoodId = id;
-                onForm(aliments[currentEditedFoodId].Nom,
-                        aliments[currentEditedFoodId].Type,
-                        aliments[currentEditedFoodId].Energie,
-                        aliments[currentEditedFoodId].Proteines,
-                        aliments[currentEditedFoodId].Glucides,
-                        aliments[currentEditedFoodId].Lipides,
-                        aliments[currentEditedFoodId].Sucres,
-                        aliments[currentEditedFoodId].Cholesterol,
-                        aliments[currentEditedFoodId].Calcium,
-                        aliments[currentEditedFoodId].Fer,
-                        aliments[currentEditedFoodId].Magnesium,
-                        aliments[currentEditedFoodId].Phosphore,
-                        aliments[currentEditedFoodId].Potassium,
-                        aliments[currentEditedFoodId].Sodium,
+                onForm(aliments[currentEditedFoodId-1].Nom,
+                        aliments[currentEditedFoodId-1].Type,
+                        aliments[currentEditedFoodId-1].Energie,
+                        aliments[currentEditedFoodId-1].Proteines,
+                        aliments[currentEditedFoodId-1].Glucides,
+                        aliments[currentEditedFoodId-1].Lipides,
+                        aliments[currentEditedFoodId-1].Sucres,
+                        aliments[currentEditedFoodId-1].Cholesterol,
+                        aliments[currentEditedFoodId-1].Calcium,
+                        aliments[currentEditedFoodId-1].Fer,
+                        aliments[currentEditedFoodId-1].Magnesium,
+                        aliments[currentEditedFoodId-1].Phosphore,
+                        aliments[currentEditedFoodId-1].Potassium,
+                        aliments[currentEditedFoodId-1].Sodium,
 
                     );
 
             }
 
             function remove(id){
+                currentMaxId = currentMaxId - 1;
                 aliments.splice(id,1);
                 $("#aliments-"+id).empty();
+                AjaxSupprimeAliment(id);
             }
             
     
@@ -186,7 +207,7 @@
                 if (newFood.nom != ''){
                     if (currentEditedFoodId >= 0){
                         editAliment(newFood);
-                        AjaxChangeAliment();
+                        AjaxChangeAliment(newFood);
                         currentFoodId = -1;
                         onForm("","","","","","","","","","","","","","");
                     }
@@ -220,14 +241,21 @@
                         ${newFood.fer}  </td> <td> 
                         ${newFood.magnesium}  </td> <td> 
                         ${newFood.phosphore}  </td> <td> 
-                        ${newFood.potassium}  </td> <td> 
-                        ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
+                        ${newFood.potassium}  </td> <td>
+                        ${newFood.sodium}  </td> <td> `)
+                if (newFood.id<114){
+                    $("#aliments-"+newFood.id).append
+                        (`</tr>`)
+                }
+                else{
+                    $("#aliments-"+newFood.id).append(`<button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
+                }         
                 currentMaxId++;
             }
 
             function editAliment(newFood){
                 newFood.id = currentEditedFoodId;
-                aliments[newFood.id] = newFood;
+                aliments[newFood.id-1] = newFood;
                 $("#aliments-"+newFood.id).empty();
                 $("#aliments-"+newFood.id).append(`<td> ${newFood.nom}  </td> <td> 
                         ${newFood.type}  </td> <td> 
