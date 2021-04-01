@@ -1,5 +1,5 @@
 <div class="conteneur-flexible ligne ">
-            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Repas <h2> </center>  
+    <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Repas <h2> </center>  
             
 
         <form id="AddMealForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
@@ -22,8 +22,6 @@
             let repas = [];
             let currentEditedMealId =-1;
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
-            
-
 
 
             function AjaxEnvoieRepas(repas){
@@ -47,24 +45,6 @@
                     });
             }
             
-
-            // function onForm(date,type_repas,login,consommation1,quatite1,consommation2,quantite2,consommation3,quantite3,consommation4,quantite4){
-            //     $("#IDdate").val(date);
-            //     $("#IDtype_repas").val(type_repas);
-            //     $("#IDlogin").val(login);
-            //     $("#IDconsommation1").val(consommation1);
-            //     $("#IDquantite1").val(quantite1);
-            //     $("#IDconsommation2").val(consommation2);
-            //     $("#IDquantite2").val(quantite2);
-            //     $("#IDconsommation3").val(consommation3);
-            //     $("#IDquantite3").val(quantite3);
-            //     $("#IDconsommation4").val(consommation4);
-            //     $("#IDquantite4").val(quantite4);
-
-            // }
-            
-    
-
             function onFormSubmit(){
                 event.preventDefault();
                 let newMeal = {};
@@ -91,6 +71,7 @@
                             //ajouteAliment(newFood);
                             AjaxEnvoieRepas(newMeal);
                             onForm("","","","","","","","","","","");
+                            $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:green\"> Votre repas a bien été ajouté à la base </p>");
                         }  
                 }
                 else{
@@ -99,31 +80,8 @@
 
                 currentMaxIdRepas++;
             }
-            
-            
-
-            // function ajouteAliment(newFood){
-            //     newFood.id = currentMaxId;
-            //     $("#table-content").append
-            //             (`<tr id=aliments-${newFood.id}> 
-            //             <td> ${newFood.nom}  </td> <td> 
-            //             ${newFood.type}  </td> <td> 
-            //             ${newFood.energie}  </td> <td> 
-            //             ${newFood.proteines}  </td> <td> 
-            //             ${newFood.glucides} </td> <td>
-            //             ${newFood.lipides}  </td> <td> 
-            //             ${newFood.sucres}  </td> <td> 
-            //             ${newFood.cholesterol}  </td> <td> 
-            //             ${newFood.calcium}  </td> <td> 
-            //             ${newFood.fer}  </td> <td> 
-            //             ${newFood.magnesium}  </td> <td> 
-            //             ${newFood.phosphore}  </td> <td> 
-            //             ${newFood.potassium}  </td> <td> 
-            //             ${newFood.sodium}  </td> <td>  <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
-            //     currentMaxId++;
-            // }
 
             
         </script>
-            </div>
-        </div>  
+    </div>
+</div>  
