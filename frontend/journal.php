@@ -14,35 +14,52 @@
 
         <script>
 
-            let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
+            let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";          
 
-            function AjaxEnvoieInfosVoulues(repas){
-                    $.ajax({
-                            //L'URL de la requête 
-                            url: urlBackendPrefix+"afficheRepas.php",
+            function AjaxEnvoieInfosVoulues(infos){
+                $.ajax({
+                        //L'URL de la requête 
+                        url: urlBackendPrefix+"afficheRepas.php",
 
-                            //La méthode d'envoi (type de requête)
-                            method: "POST",
+                        //La méthode d'envoi (type de requête)
+                        method: "POST",
 
-                            //Le format de réponse attendu
-                            dataType : "json",
-                            data : info_voulues
-                        })
-                        //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                        /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                        * cette chaine dans un div id="res"*/
-                        .always(function(response){
-                            //let data = JSON.stringify(response);
-                            console.log(response);
-                        });
+                        //Le format de réponse attendu
+                        dataType : "json",
+                        data : infos
+                    })
+                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
+                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
+                    * cette chaine dans un div id="res"*/
+                    .always(function(response){
+                        //let data = JSON.stringify(response);
+                        console.log(response);
+                    });
             }
 
-            $(document).ready(function(){
-                    $.getJSON(urlBackendPrefix+"afficheRepas.php", function(data){ 
-                        repas = data;
-                        console.log(repas);
-                    });
-                });
+            // function afficheRepas(){
+            //     $.getJSON(urlBackendPrefix+"afficheRepas.php", function(data){ 
+            //         repas = data;
+            //         console.log(repas);
+            //         $.each(repas, function(i,a){
+            //             let unRepas = {};
+            //             unRepas.
+            //         })
+            //     });
+
+            // }
+            
+            function onFormSubmit(){
+                event.preventDefault();
+                let infos_voulues = {};
+                infos_voulues.login = $("#IDlogin").val() ;
+                infos_voulues.date = $("#IDdate").val() ;
+
+                if (infos_voulues.login !='' ){
+
+                    AjaxEnvoieInfosVoulues(infos_voulues);
+                }  
+            }
         </script>
     </div>
 </div>  
