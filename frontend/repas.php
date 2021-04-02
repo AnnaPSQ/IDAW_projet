@@ -1,5 +1,5 @@
-<div class="conteneur-flexible ligne ">
-    <div class="element-flexible bleu-clair element-hw-autres"> 
+<div class="conteneur-flexible bleu ligne ">
+    <div class="element-flexible element-hw-autres"> 
         <center> <h2> Repas <h2> </center> 
         <center> <p> Renseignez vos repas ici ! </p>
             

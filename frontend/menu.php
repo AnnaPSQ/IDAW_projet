@@ -13,7 +13,7 @@
     
     echo "<div class='conteneur-flexible ligne invisible'>";
     foreach($mymenu as $pageId => $pageParameters) {
-        echo "<div class='element-flexible hw-menu'>";
+        echo "<div class='element-flexible hw-menu orange'>";
         if ($currentPageId == $pageId){
             echo "<a id= 'currentpage' href= index.php?page=$pageId>";
             echo $pageParameters[$la];
