@@ -4,7 +4,23 @@
     <div class="element-flexible bleu-clair element-hw-autres"> 
         <center> <h2> Journal <h2> </center> 
         <p> Vous trouverez ici toutes les informations sur votre alimentations ! </p>
-            
+
+        <table class = "tableau-formulaire">
+            <thead>
+                <tr>
+                    <th>ID Repas </th>
+                    <th>Date </th>
+                    <th>Type de repas </th>
+                    <th>Type d'Aliment </th>
+                    <th>Aliment (g/100g) </th>
+                    <th>Quantité (en g)</th>
+                </tr>
+            </thead>
+
+            <tbody id="table-content">
+
+            </tbody>
+        </table>
 
         <form id="AfficheRepas" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
             <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
@@ -13,52 +29,71 @@
         </form>
 
         <script>
-
+            
+            let repas = [];
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";          
 
             function AjaxEnvoieInfosVoulues(infos){
                 $.ajax({
-                        //L'URL de la requête 
-                        url: urlBackendPrefix+"afficheRepas.php",
+                    //L'URL de la requête 
+                    url: urlBackendPrefix+"afficheRepas.php",
 
-                        //La méthode d'envoi (type de requête)
-                        method: "POST",
+                    //La méthode d'envoi (type de requête)
+                    method: "POST",
 
-                        //Le format de réponse attendu
-                        dataType : "json",
-                        data : infos
-                    })
-                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                    * cette chaine dans un div id="res"*/
-                    .always(function(response){
-                        //let data = JSON.stringify(response);
-                        console.log(response);
-                    });
-            }
+                    //Le format de réponse attendu
+                    dataType : "json",
+                    data : infos,
+                    success : function(response){
 
-            // function afficheRepas(){
-            //     $.getJSON(urlBackendPrefix+"afficheRepas.php", function(data){ 
-            //         repas = data;
-            //         console.log(repas);
-            //         $.each(repas, function(i,a){
-            //             let unRepas = {};
-            //             unRepas.
-            //         })
-            //     });
+                    // .always(function(response){
+                            console.log('success');
+                            repas = response;
+                            $.each(repas, function(i,r){
+                                let unRepas = {};
+                                unRepas.id_repas = r.ID_repas;
+                                unRepas.date = r.Date;
+                                unRepas.type_repas = r.Type_repas;
+                                unRepas.type_aliment = r.Type;
+                                unRepas.nom_aliment = r.Nom;
+                                unRepas.quantite = r.Quantite;
+                                // console.log(unRepas);
+                                ajouteRepasTable(unRepas);
+                            });
+                    // })
+                    },
+                    error : function(data, statut, error){
+                        console.log(error);
+                        console.log('erreur');
+                    }
+                });
+            };
+            
 
-            // }
             
             function onFormSubmit(){
                 event.preventDefault();
+
                 let infos_voulues = {};
                 infos_voulues.login = $("#IDlogin").val() ;
                 infos_voulues.date = $("#IDdate").val() ;
 
                 if (infos_voulues.login !='' ){
-
+                    
                     AjaxEnvoieInfosVoulues(infos_voulues);
                 }  
+            }
+
+            function ajouteRepasTable(repasAd){
+                
+                $("#table-content").append
+                        (`<tr id=aliments-${repasAD.id_repas}> <td> 
+                        ${repasAd.id_repas}  </td> <td> 
+                        ${repasAd.date}  </td> <td> 
+                        ${repasAd.type_repas}  </td> <td> 
+                        ${repasAd.type_aliment}  </td> <td> 
+                        ${repasAd.nom_aliment} </td> <td>
+                        ${repasAs.quantite}  </td> </tr> `)
             }
         </script>
     </div>
