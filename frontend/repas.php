@@ -1,5 +1,7 @@
 <div class="conteneur-flexible ligne ">
-    <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> Repas <h2> </center>  
+    <div class="element-flexible bleu-clair element-hw-autres"> 
+        <center> <h2> Repas <h2> </center> 
+        <center> <p> Renseignez vos repas ici ! </p>
             
 
         <form id="AddMealForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
