@@ -16,7 +16,38 @@
 
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
 
-            function AjaxEnvoieInfosVoulues(repas){
+            function onFormSubmit(){
+                event.preventDefault();
+                let newMeal = {};
+                newMeal.IDrepas = currentMaxIdRepas ;
+                newMeal.login = $("#IDlogin").val();
+                newMeal.date = $("#IDdate").val();
+                newMeal.type_repas = $("#IDtype_repas").val();
+                newMeal.consommation1 = $("#IDconsommation1").val();
+                newMeal.quantite1 = $("#IDquantite1").val();
+                newMeal.consommation2 = $("#IDconsommation2").val();
+                newMeal.quantite2 = $("#IDquantite2").val();
+                newMeal.consommation3 = $("#IDconsommation3").val();
+                newMeal.quantite3 = $("#IDquantite3").val();
+                newMeal.consommation4 = $("#IDconsommation4").val();
+                newMeal.quantite4 = $("#IDquantite4").val();
+                $("p").remove("#contenu-removable0");
+                $("p").remove("#contenu-removable1");
+                if (newMeal.login !='' && newMeal.date != '' && newMeal.type_repas !='' &&  newMeal.consommation1 !='' && newMeal.quantite1 !=''){
+                        if((newMeal.consommation2 !='' && newMeal.quantite2 =='') || (newMeal.consommation3 !='' && newMeal.quantite3 =='') || (newMeal.consommation4 !='' && newMeal.quantite4 =='')){
+                            $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:red\"> Vous devez renseigner la quantite des aliments consommés </p>");
+                        }
+                        else{
+                            //aliments.push(newFood);
+                            //ajouteAliment(newFood);
+                            AjaxEnvoieRepas(newMeal);
+                            onForm("","","","","","","","","","","");
+                            $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:green\"> Votre repas a bien été ajouté à la base </p>");
+                        }  
+                }
+            }
+
+            function AjaxEnvoieInfosVoulues(info_voulues){
                     $.ajax({
                             //L'URL de la requête 
                             url: urlBackendPrefix+"afficheRepas.php",
