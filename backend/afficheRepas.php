@@ -6,9 +6,13 @@
                 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 
 
-                $infosRepas = $dbco->prepare("SELECT repas.ID_repas, comporte.ID_aliments, comporte.Quantite 
-                FROM repas JOIN comporte ON repas.ID_repas=comporte.ID_repas 
-                WHERE repas.ID_repas = 7 ");
+                $infosRepas = $dbco->prepare
+                ("SELECT  repas.ID_repas, repas.Date, repas.Type, aliments.Type, aliments.Nom, comporte.Quantite 
+                FROM utilisateurs
+                JOIN repas ON utilisateurs.Login = repas.Login 
+                JOIN comporte ON comporte.ID_Repas = repas.ID_repas 
+                JOIN aliments ON aliments.ID_aliments = comporte.ID_aliments
+                WHERE utilisateurs.Login = '$_POST[login]'; ");
                 $infosRepas->execute();
                 
 
@@ -18,3 +22,4 @@
             catch(PDOException $eRepas){
                 echo "Erreur : " . $eRepas->getMessage();
             }
+?>
