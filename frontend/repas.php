@@ -49,6 +49,7 @@
             
             function onFormSubmit(){
                 event.preventDefault();
+
                 let newMeal = {};
                 newMeal.IDrepas = currentMaxIdRepas ;
                 newMeal.login = $("#IDlogin").val();
@@ -62,8 +63,10 @@
                 newMeal.quantite3 = $("#IDquantite3").val();
                 newMeal.consommation4 = $("#IDconsommation4").val();
                 newMeal.quantite4 = $("#IDquantite4").val();
+
                 $("p").remove("#contenu-removable0");
                 $("p").remove("#contenu-removable1");
+                
                 if (newMeal.login !='' && newMeal.date != '' && newMeal.type_repas !='' &&  newMeal.consommation1 !='' && newMeal.quantite1 !=''){
                         if((newMeal.consommation2 !='' && newMeal.quantite2 =='') || (newMeal.consommation3 !='' && newMeal.quantite3 =='') || (newMeal.consommation4 !='' && newMeal.quantite4 =='')
                         || (newMeal.consommation2 =='' && newMeal.quantite2 !='') || (newMeal.consommation3 =='' && newMeal.quantite3 !='') || (newMeal.consommation4 =='' && newMeal.quantite4 !='')){
