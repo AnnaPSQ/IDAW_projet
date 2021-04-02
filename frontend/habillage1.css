@@ -1,5 +1,5 @@
 h1{
-    color : rgb(8, 7, 100)
+    color : rgb(255, 255, 255)
 }
 
 a{
@@ -42,12 +42,11 @@ a{
     color: rgb(182, 54, 54);
 }
 
-.bleu-fonce{background-color: rgb(5, 30, 43);}
-.bleu{background-color: rgb(36, 37, 133);}
-.bleu-clair{background-color: rgb(33, 71, 197);}
-.bleu-pale{background-color: rgb(61, 155, 231);}
-.invisible{background-color: rgb(159, 166, 173);}
-
+.vert{background-color: rgb(148, 255, 126);}
+.orange{background-color: rgb(255, 223, 118);}
+.bleu{background-color: rgb(104, 201, 188);}
+.bleu-pale{background-color: rgb(6, 53, 92);}
+.invisible{background-color: rgb(red, green, blue);}
 
 .element-hw-menu{
     height: 20%;
@@ -69,6 +68,11 @@ a{
     height: 1200px;
 }
 
+.conteneur-bandeau{
+    width: 100%;
+    height: 100%;
+}
+
 .conteneur-flexible{
     display: flex;
     align-items: center;
@@ -79,18 +83,16 @@ a{
     margin: 20px 0px;
 }
 
-
 .element-flexible{
-    flex: 5 2 10px;
-    background-color: rgb(5, 30, 43); /*Vert*/
-    border: 2px solid rgb(1, 9, 14);
+    flex: 5 2 0px;
+    border: 0px solid rgb(255, 255, 255);
     box-sizing: border-box;
-    margin: 10px;
+    margin: 20px;
     flex-basis: 1;
 }
 
 body{
-    background-color: rgb(159, 166, 173);
+    background-color: rgb(163, 1, 1);
 }
 
 button{
