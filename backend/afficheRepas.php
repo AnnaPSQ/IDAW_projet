@@ -8,7 +8,7 @@
                 
 
                 $infosRepas = $dbco->prepare
-                ("SELECT  repas.ID_repas, repas.Date, repas.Type, aliments.Type, aliments.Nom, comporte.Quantite 
+                ("SELECT  repas.ID_repas, repas.Date, repas.Type_repas, aliments.Type, aliments.Nom, comporte.Quantite 
                 FROM utilisateurs
                 JOIN repas ON utilisateurs.Login = repas.Login 
                 JOIN comporte ON comporte.ID_Repas = repas.ID_repas 

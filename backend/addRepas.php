@@ -7,7 +7,7 @@
         $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $query1 = 
-        "INSERT INTO repas (ID_repas, Date, Type, Login) 
+        "INSERT INTO repas (ID_repas, Date, Type_repas, Login) 
         VALUES('$_POST[IDrepas]', '$_POST[date]', '$_POST[type_repas]', '$_POST[login]')";
         $dbco -> exec($query1);
 

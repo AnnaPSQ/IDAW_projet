@@ -65,8 +65,9 @@
                 $("p").remove("#contenu-removable0");
                 $("p").remove("#contenu-removable1");
                 if (newMeal.login !='' && newMeal.date != '' && newMeal.type_repas !='' &&  newMeal.consommation1 !='' && newMeal.quantite1 !=''){
-                        if((newMeal.consommation2 !='' && newMeal.quantite2 =='') || (newMeal.consommation3 !='' && newMeal.quantite3 =='') || (newMeal.consommation4 !='' && newMeal.quantite4 =='')){
-                            $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:red\"> Vous devez renseigner la quantite des aliments consommés </p>");
+                        if((newMeal.consommation2 !='' && newMeal.quantite2 =='') || (newMeal.consommation3 !='' && newMeal.quantite3 =='') || (newMeal.consommation4 !='' && newMeal.quantite4 =='')
+                        || (newMeal.consommation2 =='' && newMeal.quantite2 !='') || (newMeal.consommation3 =='' && newMeal.quantite3 !='') || (newMeal.consommation4 =='' && newMeal.quantite4 !='')){
+                            $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:red\"> Vous devez renseigner un aliment ET sa quantité associée. </p>");
                         }
                         else{
                             //aliments.push(newFood);
