@@ -41,7 +41,6 @@
             //         //La méthode d'envoi (type de requête)
             //         method: "POST",
 
-<<<<<<< HEAD
                     //Le format de réponse attendu
                     dataType : "json",
                     data : infos
@@ -64,62 +63,6 @@
                 })
                 .fail(function(data, statut, error){
                     console.log('erreur');
-=======
-            //         //Le format de réponse attendu
-            //         dataType : "json",
-            //         data : infos,
-            //         success : function(response){
-
-            //         // .always(function(response){
-            //                 console.log('success');
-            //                 repas = response;
-            //                 $.each(repas, function(i,r){
-            //                     let unRepas = {};
-            //                     unRepas.id_repas = r.ID_repas;
-            //                     unRepas.date = r.Date;
-            //                     unRepas.type_repas = r.Type_repas;
-            //                     unRepas.type_aliment = r.Type;
-            //                     unRepas.nom_aliment = r.Nom;
-            //                     unRepas.quantite = r.Quantite;
-            //                     // console.log(unRepas);
-            //                     ajouteRepasTable(unRepas);
-            //                 });
-            //         // })
-            //         },
-            //         error : function(data, statut, error){
-            //             console.log(error);
-            //             console.log('erreur');
-            //         }
-            //     });
-            // };
-            
-            function AjaxAfficheRepas(login){
-                
-                $.ajax({
-                    url: urlBackendPrefix+"journal/afficheRepas.php?id_login='"+login+"'",
-                    type: 'GET',
-                    dataType: 'json',
-                    success : function(data){
-                        console.log('success');
-                        repas = data;
-                        $.each(repas, function(i,r){
-                            let unRepas = {};
-                            unRepas.id_repas = r.ID_repas;
-                            unRepas.date = r.Date;
-                            unRepas.type_repas = r.Type_repas;
-                            unRepas.type_aliment = r.Type;
-                            unRepas.nom_aliment = r.Nom;
-                            unRepas.quantite = r.Quantite;
-                            // console.log(unRepas);
-                            ajouteRepasTable(unRepas);
-                        });
-                    },
-                    error : function(data, statut, error){
-                    console.log(data);
-                    console.log(statut);
-                    console.log("bande de nuls"+error);
-                    }
->>>>>>> c00f587d4aaba182528e87e80b057e2a1b5131c3
                 });
             }
 
