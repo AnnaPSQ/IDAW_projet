@@ -39,7 +39,7 @@ a{
 }
 
 #currentpage{
-    color: rgb(182, 54, 54);
+    color: rgb(255, 255, 255);
 }
 
 .vert{background-color: rgb(148, 255, 126);}
@@ -92,7 +92,7 @@ a{
 }
 
 body{
-    background-color: rgb(163, 1, 1);
+    background-color: rgb(255, 223, 255);
 }
 
 button{
