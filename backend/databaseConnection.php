@@ -1,10 +1,11 @@
 <?php
 
-  function databaseConnexion(){
-    $servername = 'localhost';
-    $db_name='projetidaw';
-    $username = 'root';
-    $password = '';
+  function databaseConnection(){
+    $servname = 'localhost';
+    $dbname='projetidaw';
+    $user = 'root';
+    $pass = '';
+    $dbco = '';
     //On établit la connexion
     try{
         $dbco = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8", $user, $pass);

@@ -1,10 +1,10 @@
 <?php
-    header('Content-Type: application/json; charset=UTF-8');
+    // header('Content-Type: application/json; charset=UTF-8');
     
     require_once("../databaseConnection.php");
 
     function getRepas($login){
-        $conn=databaseConnexion();
+        $dbco=databaseConnection();
 
         $infosRepas = $dbco->prepare
         ("SELECT  repas.ID_repas, repas.Date, repas.Type_repas, aliments.Type, aliments.Nom, comporte.Quantite 
@@ -19,12 +19,9 @@
 
 
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
-        if (isset($_GET['id_aliment'])){
-          $resultat=getRepas($_GET['id_aliment']);
-          $repas=mysqli_fetch_assoc($resultat);
-          $retour["success"]=true;
-          $retour["message"]="Le résultat a bien été affiché";
-          $retour["results"]["repas"]=$repas;
+        if (isset($_GET['id_login'])){
+          $resultat=getRepas($_GET['id_login']);
+          $retour = $resultat->fetchAll(PDO::FETCH_ASSOC);
           echo json_encode($retour);
         }
     }
