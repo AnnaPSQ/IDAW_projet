@@ -43,29 +43,26 @@
 
                     //Le format de réponse attendu
                     dataType : "json",
-                    data : infos,
-                    success : function(response){
-
+                    data : infos
+                })
+                .done(function(data){
                     // .always(function(response){
-                            console.log('success');
-                            repas = response;
-                            $.each(repas, function(i,r){
-                                let unRepas = {};
-                                unRepas.id_repas = r.ID_repas;
-                                unRepas.date = r.Date;
-                                unRepas.type_repas = r.Type_repas;
-                                unRepas.type_aliment = r.Type;
-                                unRepas.nom_aliment = r.Nom;
-                                unRepas.quantite = r.Quantite;
-                                // console.log(unRepas);
-                                ajouteRepasTable(unRepas);
-                            });
-                    // })
-                    },
-                    error : function(data, statut, error){
-                        console.log(error);
-                        console.log('erreur');
-                    }
+                    console.log('success');
+                    repas = data;
+                    $.each(repas, function(i,r){
+                        let unRepas = {};
+                        unRepas.id_repas = r.ID_repas;
+                        unRepas.date = r.Date;
+                        unRepas.type_repas = r.Type_repas;
+                        unRepas.type_aliment = r.Type;
+                        unRepas.nom_aliment = r.Nom;
+                        unRepas.quantite = r.Quantite;
+                       // console.log(unRepas);
+                        ajouteRepasTable(unRepas);
+                    });
+                })
+                .fail(function(data, statut, error){
+                    console.log('erreur');
                 });
             };
             
