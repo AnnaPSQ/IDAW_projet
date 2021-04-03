@@ -33,41 +33,42 @@
             let repas = [];
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";          
 
-            function AjaxEnvoieInfosVoulues(infos){
-                $.ajax({
-                    //L'URL de la requête 
-                    url: urlBackendPrefix+"afficheRepas.php",
+            // function AjaxEnvoieInfosVoulues(infos){
+            //     $.ajax({
+            //         //L'URL de la requête 
+            //         url: urlBackendPrefix+"afficheRepas.php",
 
-                    //La méthode d'envoi (type de requête)
-                    method: "POST",
+            //         //La méthode d'envoi (type de requête)
+            //         method: "POST",
 
-                    //Le format de réponse attendu
-                    dataType : "json",
-                    data : infos,
-                    success : function(response){
+            //         //Le format de réponse attendu
+            //         dataType : "json",
+            //         data : infos,
+            //         success : function(response){
 
-                    // .always(function(response){
-                            console.log('success');
-                            repas = response;
-                            $.each(repas, function(i,r){
-                                let unRepas = {};
-                                unRepas.id_repas = r.ID_repas;
-                                unRepas.date = r.Date;
-                                unRepas.type_repas = r.Type_repas;
-                                unRepas.type_aliment = r.Type;
-                                unRepas.nom_aliment = r.Nom;
-                                unRepas.quantite = r.Quantite;
-                                // console.log(unRepas);
-                                ajouteRepasTable(unRepas);
-                            });
-                    // })
-                    },
-                    error : function(data, statut, error){
-                        console.log(error);
-                        console.log('erreur');
-                    }
-                });
-            };
+            //         // .always(function(response){
+            //                 console.log('success');
+            //                 repas = response;
+            //                 $.each(repas, function(i,r){
+            //                     let unRepas = {};
+            //                     unRepas.id_repas = r.ID_repas;
+            //                     unRepas.date = r.Date;
+            //                     unRepas.type_repas = r.Type_repas;
+            //                     unRepas.type_aliment = r.Type;
+            //                     unRepas.nom_aliment = r.Nom;
+            //                     unRepas.quantite = r.Quantite;
+            //                     // console.log(unRepas);
+            //                     ajouteRepasTable(unRepas);
+            //                 });
+            //         // })
+            //         },
+            //         error : function(data, statut, error){
+            //             console.log(error);
+            //             console.log('erreur');
+            //         }
+            //     });
+            // };
+            
             
 
             
