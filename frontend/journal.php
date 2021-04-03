@@ -22,10 +22,10 @@
             </tbody>
         </table>
 
-        <form id="AfficheRepas" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
+        <form id="AfficheRepas"  autocomplete="off" method="GET">
             <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
             <p>Date (optionnel) <br id="contenu-date"> <input type="date" id="IDdate" name="date"></p>
-            <p><button type="submit">Submit</button></p>
+            <p><button onClick="onFormSubmit();">Submit</button></p>
         </form>
 
         <script>
@@ -33,14 +33,15 @@
             let repas = [];
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";          
 
-            function AjaxEnvoieInfosVoulues(infos){
-                $.ajax({
-                    //L'URL de la requête 
-                    url: urlBackendPrefix+"afficheRepas.php",
+            // function AjaxEnvoieInfosVoulues(infos){
+            //     $.ajax({
+            //         //L'URL de la requête 
+            //         url: urlBackendPrefix+"afficheRepas.php",
 
-                    //La méthode d'envoi (type de requête)
-                    method: "POST",
+            //         //La méthode d'envoi (type de requête)
+            //         method: "POST",
 
+<<<<<<< HEAD
                     //Le format de réponse attendu
                     dataType : "json",
                     data : infos
@@ -63,34 +64,93 @@
                 })
                 .fail(function(data, statut, error){
                     console.log('erreur');
-                });
-            };
+=======
+            //         //Le format de réponse attendu
+            //         dataType : "json",
+            //         data : infos,
+            //         success : function(response){
+
+            //         // .always(function(response){
+            //                 console.log('success');
+            //                 repas = response;
+            //                 $.each(repas, function(i,r){
+            //                     let unRepas = {};
+            //                     unRepas.id_repas = r.ID_repas;
+            //                     unRepas.date = r.Date;
+            //                     unRepas.type_repas = r.Type_repas;
+            //                     unRepas.type_aliment = r.Type;
+            //                     unRepas.nom_aliment = r.Nom;
+            //                     unRepas.quantite = r.Quantite;
+            //                     // console.log(unRepas);
+            //                     ajouteRepasTable(unRepas);
+            //                 });
+            //         // })
+            //         },
+            //         error : function(data, statut, error){
+            //             console.log(error);
+            //             console.log('erreur');
+            //         }
+            //     });
+            // };
             
+            function AjaxAfficheRepas(login){
+                
+                $.ajax({
+                    url: urlBackendPrefix+"journal/afficheRepas.php?id_login='"+login+"'",
+                    type: 'GET',
+                    dataType: 'json',
+                    success : function(data){
+                        console.log('success');
+                        repas = data;
+                        $.each(repas, function(i,r){
+                            let unRepas = {};
+                            unRepas.id_repas = r.ID_repas;
+                            unRepas.date = r.Date;
+                            unRepas.type_repas = r.Type_repas;
+                            unRepas.type_aliment = r.Type;
+                            unRepas.nom_aliment = r.Nom;
+                            unRepas.quantite = r.Quantite;
+                            // console.log(unRepas);
+                            ajouteRepasTable(unRepas);
+                        });
+                    },
+                    error : function(data, statut, error){
+                    console.log(data);
+                    console.log(statut);
+                    console.log("bande de nuls"+error);
+                    }
+>>>>>>> c00f587d4aaba182528e87e80b057e2a1b5131c3
+                });
+            }
+
 
             
             function onFormSubmit(){
                 event.preventDefault();
 
-                let infos_voulues = {};
-                infos_voulues.login = $("#IDlogin").val() ;
-                infos_voulues.date = $("#IDdate").val() ;
+                // let infos_voulues = {};
+                // infos_voulues.login = $("#IDlogin").val() ;
+                // infos_voulues.date = $("#IDdate").val() ;
 
-                if (infos_voulues.login !='' ){
+                let login_value = $("input[name='login']").val();
+                AjaxAfficheRepas(login_value);
+
+                // if (infos_voulues.login !='' ){
                     
-                    AjaxEnvoieInfosVoulues(infos_voulues);
-                }  
+                //     AjaxAfficheRepas(infos_voulues.login);
+                // }  
             }
 
             function ajouteRepasTable(repasAd){
                 
                 $("#table-content").append
-                        (`<tr id=aliments-${repasAD.id_repas}> <td> 
+                        (`<tr id=aliments-${repasAd.id_repas}> <td> 
                         ${repasAd.id_repas}  </td> <td> 
                         ${repasAd.date}  </td> <td> 
                         ${repasAd.type_repas}  </td> <td> 
                         ${repasAd.type_aliment}  </td> <td> 
                         ${repasAd.nom_aliment} </td> <td>
-                        ${repasAs.quantite}  </td> </tr> `)
+                        ${repasAd.quantite}  </td> </tr> `)
             }
         </script>
     </div>
