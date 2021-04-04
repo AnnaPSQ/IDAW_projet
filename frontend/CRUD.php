@@ -23,23 +23,6 @@
 
             <tbody>
 
-            <tr> 
-                        <td> ${newFood.nom}  </td> <td> 
-                        ${newFood.type}  </td> <td> 
-                        ${newFood.energie}  </td> <td> 
-                        ${newFood.proteines}  </td> <td> 
-                        ${newFood.glucides} </td> <td>
-                        ${newFood.lipides}  </td> <td> 
-                        ${newFood.sucres}  </td> <td> 
-                        ${newFood.cholesterol}  </td> <td> 
-                        ${newFood.calcium}  </td> <td> 
-                        ${newFood.fer}  </td> <td> 
-                        ${newFood.magnesium}  </td> <td> 
-                        ${newFood.phosphore}  </td> <td> 
-                        ${newFood.potassium}  </td> <td>
-                        ${newFood.sodium}  </td> <td>
-            </tr>
-
             </tbody>
         </table>
 
