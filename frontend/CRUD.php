@@ -1,7 +1,7 @@
         <div class="conteneur-flexible ligne ">
             <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> CRUD <h2> </center>  
             
-            <table class = "tableau-formulaire">
+            <table id = "table-CRUD" class = "tableau-formulaire">
             <thead>
                 <tr>
                     <th>Nom de l'aliment </th>
@@ -51,6 +51,7 @@
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
             
             $(document).ready(function(){
+                $('#table-CRUD').DataTable()
                 $.getJSON(urlBackendPrefix+"afficheAliment.php", function(data){ 
                     aliments = data;
                     $.each(aliments, function(i, a){
@@ -90,9 +91,9 @@
                     //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
                     /*On peut par exemple convertir cette réponse en chaine JSON et insérer
                     * cette chaine dans un div id="res"*/
-                    .always(function(response){
-                        //let data = JSON.stringify(response);
-                        console.log(response);
+                    .done(function(response){
+                        let data = JSON.stringify(response);
+                        console.log(data);
                     });
             }
             
