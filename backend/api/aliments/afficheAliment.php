@@ -1,11 +1,8 @@
 <?php
-            $servname = "localhost"; $dbname = "projetidaw"; $user = "root"; $pass = "";
-            
-            try{
+    $servname = "localhost"; $dbname = "projetidaw"; $user = "root"; $pass = "";
+    try{
                 $dbco = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8", $user, $pass);
                 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                
-
                 $infosAliments = $dbco->prepare("SELECT Nom, Type, En.Ratio AS Energie, Pro.Ratio AS Proteines, Glu.Ratio As Glucides, Lip.Ratio As Lipides, Suc.Ratio As Sucres, Cho.Ratio As Cholesterol, Cal.Ratio As Calcium, Fer.Ratio As Fer, Mag.Ratio As Magnesium, Pho.Ratio As Phosphore, Pot.Ratio As Potassium, Sod.Ratio As Sodium FROM `aliments` 
                 LEFT JOIN a_pour_apport AS En ON aliments.ID_aliments = En.ID_aliments AND En.ID_apport=1 
                 LEFT JOIN a_pour_apport AS Pro ON aliments.ID_aliments = Pro.ID_aliments AND Pro.ID_apport=3
@@ -24,7 +21,8 @@
 
                 $resultatinfosAliments = $infosAliments->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($resultatinfosAliments);
-            }
+    }
+
             catch(PDOException $e){
                 echo "Erreur : " . $e->getMessage();
             }

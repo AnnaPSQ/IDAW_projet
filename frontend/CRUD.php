@@ -1,7 +1,7 @@
         <div class="conteneur-flexible ligne ">
             <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> CRUD <h2> </center>  
             
-            <table id = "table-CRUD" class = "tableau-formulaire">
+        <table id = "table-CRUD" class = "display" class="width:100%">
             <thead>
                 <tr>
                     <th>Nom de l'aliment </th>
@@ -21,7 +21,24 @@
                 </tr>
             </thead>
 
-            <tbody id="table-content">
+            <tbody>
+
+            <tr> 
+                        <td> ${newFood.nom}  </td> <td> 
+                        ${newFood.type}  </td> <td> 
+                        ${newFood.energie}  </td> <td> 
+                        ${newFood.proteines}  </td> <td> 
+                        ${newFood.glucides} </td> <td>
+                        ${newFood.lipides}  </td> <td> 
+                        ${newFood.sucres}  </td> <td> 
+                        ${newFood.cholesterol}  </td> <td> 
+                        ${newFood.calcium}  </td> <td> 
+                        ${newFood.fer}  </td> <td> 
+                        ${newFood.magnesium}  </td> <td> 
+                        ${newFood.phosphore}  </td> <td> 
+                        ${newFood.potassium}  </td> <td>
+                        ${newFood.sodium}  </td> <td>
+            </tr>
 
             </tbody>
         </table>
@@ -49,48 +66,14 @@
             let aliments = [];
             let currentEditedFoodId =-1;
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
-            
-            $(document).ready(function(){
-                $('#table-CRUD').DataTable()
-                $.getJSON(urlBackendPrefix+"afficheAliment.php", function(data){ 
-                    aliments = data;
-                    $.each(aliments, function(i, a){
-                        let aliment = {};
-                        aliment.nom = a.Nom;
-                        aliment.type = a.Type; 
-                        aliment.energie = a.Energie;
-                        aliment.proteines = a.Proteines;
-                        aliment.glucides = a.Glucides;
-                        aliment.lipides = a.Lipides;
-                        aliment.sucres = a.Sucres;
-                        aliment.cholesterol = a.Cholesterol;
-                        aliment.calcium = a.Calcium;
-                        aliment.fer = a.Fer;
-                        aliment.magnesium = a.Magnesium;
-                        aliment.phosphore = a.Phosphore;
-                        aliment.potassium = a.Potassium;
-                        aliment.sodium = a.Sodium;
-                        ajouteAliment(aliment);
-                    });
-                });
-            });
- 
 
             function AjaxEnvoieAliment(aliment){
                 $.ajax({
-                        //L'URL de la requête 
-                        url: urlBackendPrefix+"addAliment.php",
-
-                        //La méthode d'envoi (type de requête)
+                        url: urlBackendPrefix+"api/aliments/addAliment.php",
                         method: "POST",
-
-                        //Le format de réponse attendu
                         dataType : "json",
                         data : aliment
                     })
-                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                    * cette chaine dans un div id="res"*/
                     .done(function(response){
                         let data = JSON.stringify(response);
                         console.log(data);
@@ -99,42 +82,24 @@
             
             function AjaxChangeAliment(aliment){
                 $.ajax({
-                        //L'URL de la requête 
-                        url: urlBackendPrefix+"editAliment.php",
-
-                        //La méthode d'envoi (type de requête)
+                        url: urlBackendPrefix+"api/aliments/editAliment.php",
                         method: "POST",
-
-                        //Le format de réponse attendu
                         dataType : "json",
                         data : aliment
                     })
-                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                    * cette chaine dans un div id="res"*/
                     .always(function(response){
-                        //let data = JSON.stringify(response);
                         console.log(response);
                     });
             }
 
             function AjaxSupprimeAliment(id){
                 $.ajax({
-                        //L'URL de la requête 
-                        url: urlBackendPrefix+"deleteAliment.php",
-
-                        //La méthode d'envoi (type de requête)
+                        url: urlBackendPrefix+"api/aliments/deleteAliment.php",
                         method: "POST",
-
-                        //Le format de réponse attendu
                         dataType : "json",
                         data : {'id': id}
                     })
-                    //Ce code sera exécuté en cas de succès - La réponse du serveur est passée à done()
-                    /*On peut par exemple convertir cette réponse en chaine JSON et insérer
-                    * cette chaine dans un div id="res"*/
                     .always(function(response){
-                        //let data = JSON.stringify(response);
                         console.log(response);
                     });
             }
@@ -228,7 +193,7 @@
 
             function ajouteAliment(newFood){
                 newFood.id = currentMaxId;
-                $("#table-content").append
+                $("#table-CRUD").append
                         (`<tr id=aliments-${newFood.id}> 
                         <td> ${newFood.nom}  </td> <td> 
                         ${newFood.type}  </td> <td> 
@@ -250,7 +215,7 @@
                 }
                 else{
                     $("#aliments-"+newFood.id).append(`<button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td> </tr>`);
-                }         
+                }       
                 currentMaxId++;
             }
 
@@ -275,7 +240,32 @@
                         <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td>`);
             }
 
-            
+                    
+            $(document).ready(function(){
+                $.getJSON(urlBackendPrefix+"api/aliments/afficheAliment.php", function(data){ 
+                    aliments = data;
+                    $.each(aliments, function(i, a){
+                        let aliment = {};
+                        aliment.nom = a.Nom;
+                        aliment.type = a.Type; 
+                        aliment.energie = a.Energie;
+                        aliment.proteines = a.Proteines;
+                        aliment.glucides = a.Glucides;
+                        aliment.lipides = a.Lipides;
+                        aliment.sucres = a.Sucres;
+                        aliment.cholesterol = a.Cholesterol;
+                        aliment.calcium = a.Calcium;
+                        aliment.fer = a.Fer;
+                        aliment.magnesium = a.Magnesium;
+                        aliment.phosphore = a.Phosphore;
+                        aliment.potassium = a.Potassium;
+                        aliment.sodium = a.Sodium;
+                        ajouteAliment(aliment);
+                    });
+                    $("#table-CRUD").DataTable();
+                });
+            });
+       
         </script>
             </div>
         </div>        

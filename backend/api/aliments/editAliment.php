@@ -1,10 +1,8 @@
 <?php
-            $servname = "localhost"; $dbname = "projetidaw"; $user = "root"; $pass = "";
-            print_r($_POST);
-            try{
+    $servname = "localhost"; $dbname = "projetidaw"; $user = "root"; $pass = "";
+    try{
                 $dbco = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8", $user, $pass);
                 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
                 $query1 = "UPDATE a_pour_apport
                            SET Ratio = '$_POST[energie]'
                            WHERE ID_aliments = '$_POST[id]' AND ID_apport = 1" ;
