@@ -20,16 +20,36 @@
         </form>
 
         <script>
-            let currentMaxIdRepas = 21; 
+            
             let repas = [];
-            let currentEditedMealId =-1;
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
+            let currentMaxIdRepas = -1; 
 
+            function AjaxIDRepas(){
+                
+                $.ajax({
+                    url: urlBackendPrefix+"repas/idRepas.php",
+                    type: 'GET',
+                    dataType: 'json',
+                    success : function(data){
+                        console.log('success');
+                        console.log(data);
+                        IDrepas = data[0]['COUNT(*)'];
+                        console.log(IDrepas);
+                        currentMaxIdRepas = IDrepas;
+                    },
+                    error : function(data, statut, error){
+                    console.log(data);
+                    console.log(statut);
+                    console.log(error);
+                    }
+                });
+            }
 
             function AjaxEnvoieRepas(repas){
                 $.ajax({
                         //L'URL de la requête 
-                        url: urlBackendPrefix+"addRepas.php",
+                        url: urlBackendPrefix+"repas/addRepas.php",
 
                         //La méthode d'envoi (type de requête)
                         method: "POST",
@@ -42,9 +62,22 @@
                     /*On peut par exemple convertir cette réponse en chaine JSON et insérer
                     * cette chaine dans un div id="res"*/
                     .always(function(response){
-                        //let data = JSON.stringify(response);
                         console.log(response);
                     });
+            }
+
+            function onForm(login,date,type,aliment1,quantite1,aliment2,quantite2,aliment3,quantite3,aliment4,quantite4){
+                $("#IDlogin").val(login);
+                $("#IDdate").val(date);
+                $("#IDtype_repas").val(type);
+                $("#IDconsommation1").val(aliment1);
+                $("#IDquantite1").val(quantite1);
+                $("#IDconsommation2").val(aliment2);
+                $("#IDquantite2").val(quantite2);
+                $("#IDconsommation3").val(aliment3);
+                $("#IDquantite3").val(quantite3);
+                $("#IDconsommation4").val(aliment4);
+                $("#IDquantite4").val(quantite4);
             }
             
             function onFormSubmit(){
@@ -84,9 +117,12 @@
                     $("#contenu-login").before("<p id=\"contenu-removable1\" style=\"color:red\"> Vous devez renseigner au moins les 5 premiers champs pour valider votre repas </p>");
                 }
 
-                currentMaxIdRepas++;
+                
             }
 
+            $(document).ready(function(){
+                AjaxIDRepas();
+            });
             
         </script>
     </div>
