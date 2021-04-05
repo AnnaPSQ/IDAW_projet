@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 26 mars 2021 à 13:57
+-- Généré le : lun. 05 avr. 2021 à 21:03
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -1570,9 +1570,25 @@ CREATE TABLE IF NOT EXISTS `comporte` (
 --
 
 INSERT INTO `comporte` (`ID_aliments`, `ID_repas`, `Quantite`) VALUES
+(1, 26, 100),
+(6, 24, 100),
+(14, 21, 214),
+(14, 23, 50),
+(19, 25, 150),
+(22, 3, 250),
+(24, 28, 310),
 (25, 7, 200),
 (36, 15, 250),
-(99, 17, 100);
+(42, 27, 210),
+(45, -1, 100),
+(56, 25, 140),
+(57, 7, 100),
+(60, 7, 150),
+(65, 24, 120),
+(88, 24, 60),
+(98, 24, 50),
+(99, 17, 100),
+(108, 23, 400);
 
 -- --------------------------------------------------------
 
@@ -1609,17 +1625,18 @@ DROP TABLE IF EXISTS `repas`;
 CREATE TABLE IF NOT EXISTS `repas` (
   `ID_repas` int(11) NOT NULL AUTO_INCREMENT,
   `Date` datetime NOT NULL,
-  `Type` varchar(50) NOT NULL,
+  `Type_repas` varchar(50) NOT NULL,
   `Login` varchar(50) NOT NULL,
   PRIMARY KEY (`ID_repas`),
   KEY `REPAS_UTILISATEURS0_FK` (`Login`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `repas`
 --
 
-INSERT INTO `repas` (`ID_repas`, `Date`, `Type`, `Login`) VALUES
+INSERT INTO `repas` (`ID_repas`, `Date`, `Type_repas`, `Login`) VALUES
+(-1, '2021-04-02 20:07:00', 'Diner', 'anna.pasquier@etu.imt-lille-douai.fr'),
 (2, '2021-03-01 11:25:41', 'Déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
 (3, '2021-03-01 19:25:41', 'Diner', 'anna.pasquier@etu.imt-lille-douai.fr'),
 (4, '2021-03-02 08:26:58', 'Petit Déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
@@ -1638,7 +1655,14 @@ INSERT INTO `repas` (`ID_repas`, `Date`, `Type`, `Login`) VALUES
 (17, '2021-03-08 19:34:17', 'Diner', 'antoine.goron@etu.imt-lille-douai.fr'),
 (18, '2021-03-09 11:35:38', 'Déjeuner', 'antoine.goron@etu.imt-lille-douai.fr'),
 (19, '2021-03-09 19:35:38', 'Diner', 'antoine.goron@etu.imt-lille-douai.fr'),
-(20, '2021-03-10 11:36:07', 'Déjeuner', 'antoine.goron@etu.imt-lille-douai.fr');
+(20, '2021-03-10 11:36:07', 'Déjeuner', 'antoine.goron@etu.imt-lille-douai.fr'),
+(21, '2021-04-17 11:15:00', 'déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(23, '2021-05-03 12:52:00', 'Déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(24, '2021-04-04 13:06:00', 'Déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(25, '2021-03-25 14:13:00', 'Déjeuner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(26, '2021-04-05 19:56:30', 'Dinner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(27, '2021-04-04 22:30:00', 'Diner', 'anna.pasquier@etu.imt-lille-douai.fr'),
+(28, '2021-04-06 07:36:00', 'Dejeuner', 'anna.pasquier@etu.imt-lille-douai.fr');
 
 -- --------------------------------------------------------
 
