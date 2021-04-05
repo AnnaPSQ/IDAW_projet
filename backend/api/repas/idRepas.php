@@ -15,6 +15,6 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $resultat=getIdRepas();
-        $retour = $resultat->fetchColumn();
+        $retour = $resultat->fetchObject();
         echo json_encode($retour);
     }

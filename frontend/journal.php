@@ -35,9 +35,12 @@
             <h2> Afficher vos apport ! </h2>
             <form id="AfficheApports"  autocomplete="off" method="GET">
                 <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
-                <input type="checkbox" id="IDjour" name="jour"> <label for="Jour">Du jour</label>
-                <input type="checkbox" id="IDsemaine" name="semaine"> <label for="Semaine">De la semaine</label>
-                <input type="checkbox" id="IDmois" name="mois"> <label for="Mois">Du mois</label>
+                <label for="searchDuree" class="col">Période</label>
+                    <select id="IDperiode" name="periode">
+                        <option value="jour">Jour</option>
+                        <option value="semaine">Semaine</option>
+                        <option value="mois">Mois</option>
+                    <select>
                 <p><button onClick="onFormSubmitApports();">Submit</button></p>
             </form>
             <script>
@@ -82,7 +85,7 @@
                         dataType: 'json',
                         success : function(data){
                             console.log('success');
-                            repas = data;
+                            apports = data;
                             $.each(repas, function(i,r){
                                 let unRepas = {};
                                 unRepas.id_repas = r.ID_repas;
@@ -128,16 +131,7 @@
 
                     let apports= {};
                     apports.login = $("input[name='login']").val();
-                    apports.periode = "jour";
-                    if  ($("#Jour").prop("checked")){
-                        apports.periode = "jour";
-                    }
-                    else if  ($("#Semaine").prop("checked")){
-                        apports.periode = "semaine";
-                    }
-                    else if  ($("#Mois").prop("checked")){
-                        apports.periode = "mois";
-                    }
+                    apports.periode = $('#IDperiode').val();
                     AjaxAfficheApports(apports.login, apports.periode);
                     console.log(apports);          
 

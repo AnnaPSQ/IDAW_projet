@@ -23,20 +23,17 @@
             
             let repas = [];
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
-            let currentMaxIdRepas = ""; 
+            let currentMaxIdRepas = -1; 
 
             function AjaxIDRepas(){
                 
                 $.ajax({
                     url: urlBackendPrefix+"api/repas/idRepas.php",
                     type: 'GET',
-                    // dataType: 'json',
+                    dataType: 'json',
                     success : function(data){
                         console.log('success');
-                        console.log(data);
-                        IDrepas = data;
-                        // ['COUNT(*)'];
-                        console.log(IDrepas);
+                        IDrepas = data['COUNT(*)'];
                         ChangeValeurCurrentMaxIdRepas(IDrepas);
                     },
                     error : function(data, statut, error){
@@ -70,7 +67,7 @@
             function ChangeValeurCurrentMaxIdRepas(IDrepas){
                 console.log('Les deux val');
                 console.log(IDrepas);
-                currentMaxIdRepas = parseInt(IDrepas,10);
+                currentMaxIdRepas = Number(IDrepas) +2;
                 console.log(currentMaxIdRepas);
             }
 
@@ -112,6 +109,7 @@
                         if((newMeal.consommation2 !='' && newMeal.quantite2 =='') || (newMeal.consommation3 !='' && newMeal.quantite3 =='') || (newMeal.consommation4 !='' && newMeal.quantite4 =='')
                         || (newMeal.consommation2 =='' && newMeal.quantite2 !='') || (newMeal.consommation3 =='' && newMeal.quantite3 !='') || (newMeal.consommation4 =='' && newMeal.quantite4 !='')){
                             $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:red\"> Vous devez renseigner un aliment ET sa quantité associée. </p>");
+                            currentMaxIdRepas ++;
                         }
                         else{
                             //aliments.push(newFood);

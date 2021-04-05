@@ -25,8 +25,10 @@
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
         
     //     // variables GET: $_GET['id_periode'] et $_GET['id_login']
-        if (isset($_GET['id_login'])){
-            if (isset($_GET['jour'])){
+        if (isset($_GET['id_login']) && isset($_GET['id_periode'])){
+            print_r($_GET);
+            print_r($_GET['id_periode']);
+            if ($_GET['id_periode']=="'jour'"){
                 $resultat["Energie"]=getApports($_GET['id_login'],'Energie',1);
                 $resultat["Proteines"]=getApports($_GET['id_login'],'Protéines',1);
                 $resultat["Glucides"]=getApports($_GET['id_login'],'Glucides',1);
@@ -55,7 +57,7 @@
                 echo json_encode($retour);
                 
             }
-            else if (isset($_GET['semaine'])){
+            else if ($_GET['id_periode']=="'semaine'"){
                 $resultat["Energie"]=getApports($_GET['id_login'],'Energie',7);
                 $resultat["Proteines"]=getApports($_GET['id_login'],'Protéines',7);
                 $resultat["Glucides"]=getApports($_GET['id_login'],'Glucides',7);
@@ -84,7 +86,7 @@
                 echo json_encode($retour);
             }
 
-            else if (isset($_GET['mois'])){
+            else if ($_GET['id_periode']=="'mois'"){
                 $resultat["Energie"]=getApports($_GET['id_login'],'Energie',30);
                 $resultat["Proteines"]=getApports($_GET['id_login'],'Protéines',30);
                 $resultat["Glucides"]=getApports($_GET['id_login'],'Glucides',30);
