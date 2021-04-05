@@ -8,21 +8,23 @@
 
     function getApports($login, $apport, $periode){
         $dbco=databaseConnection();
-        
+
         $infosApports = $dbco -> prepare
-        ("SELECT *, (a_pour_apport.Ratio/100) * comporte.Quantite AS 'ApportTotal'
-        FROM `apport` 
+        ("SELECT SUM((a_pour_apport.Ratio/100) * comporte.Quantite) AS 'ApportTotal'
+        FROM apport 
         JOIN a_pour_apport ON apport.ID_apport = a_pour_apport.ID_apport
         JOIN aliments ON a_pour_apport.ID_aliments = aliments.ID_aliments
         JOIN comporte ON aliments.ID_aliments = comporte.ID_aliments
         JOIN repas ON comporte.ID_repas = repas.ID_repas
-        WHERE repas.Login = ".$login. "AND apport.Apport =". $apport. "AND repas.Date BETWEEN CURDATE() - INTERVAL". $periode." DAY AND CURDATE()";)
+        WHERE repas.Login = $login AND apport.Apport = '$apport' AND repas.Date BETWEEN CURDATE() - INTERVAL $periode DAY AND CURDATE()");
         $infosApports->execute();
         return($infosApports);
     }
 
 
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
+        
+    //     // variables GET: $_GET['id_periode'] et $_GET['id_login']
         if (isset($_GET['id_login'])){
             if (isset($_GET['jour'])){
                 $resultat["Energie"]=getApports($_GET['id_login'],'Energie',1);
@@ -67,11 +69,23 @@
                 $resultat["Potassium"]=getApports($_GET['id_login'],'Potassium',7);
                 $resultat["Sodium"]=getApports($_GET['id_login'],'Sodium',7);
 
-                $retour = $resultat->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Energie"] = $resultat["Energie"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Proteines"] = $resultat["Proteines"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Glucides"] = $resultat["Glucides"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Lipides"] = $resultat["Lipides"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Sucres"] = $resultat["Sucres"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Cholesterol"] = $resultat["Cholesterol"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Calcium"] = $resultat["Calcium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Fer"] = $resultat["Fer"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Magnesium"] = $resultat["Magnesium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Phosphore"] = $resultat["Phosphore"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Potassium"] = $resultat["Potassium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Sodium"] = $resultat["Sodium"]->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($retour);
             }
-            else (isset($_GET['mois'])){
-                $resultat["Energie"] = getApports($_GET['id_login'],'Energie',30);
+
+            else if (isset($_GET['mois'])){
+                $resultat["Energie"]=getApports($_GET['id_login'],'Energie',30);
                 $resultat["Proteines"]=getApports($_GET['id_login'],'Protéines',30);
                 $resultat["Glucides"]=getApports($_GET['id_login'],'Glucides',30);
                 $resultat["Lipides"]=getApports($_GET['id_login'],'Lipides',30);
@@ -84,7 +98,23 @@
                 $resultat["Potassium"]=getApports($_GET['id_login'],'Potassium',30);
                 $resultat["Sodium"]=getApports($_GET['id_login'],'Sodium',30);
 
-                $retour = $resultat->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Energie"] = $resultat["Energie"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Proteines"] = $resultat["Proteines"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Glucides"] = $resultat["Glucides"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Lipides"] = $resultat["Lipides"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Sucres"] = $resultat["Sucres"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Cholesterol"] = $resultat["Cholesterol"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Calcium"] = $resultat["Calcium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Fer"] = $resultat["Fer"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Magnesium"] = $resultat["Magnesium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Phosphore"] = $resultat["Phosphore"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Potassium"] = $resultat["Potassium"]->fetchAll(PDO::FETCH_ASSOC);
+                $retour["Sodium"] = $resultat["Sodium"]->fetchAll(PDO::FETCH_ASSOC);
                 echo json_encode($retour);
             }
+
+
+
+        }
     }
+    
