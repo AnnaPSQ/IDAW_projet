@@ -1,5 +1,3 @@
-<script src='scripts/repas.js'></script>
-
 <div class="conteneur-flexible bleu ligne ">
     <div class="element-flexible element-hw-autres"> 
         <center> <h2> Repas <h2> </center> 
@@ -20,5 +18,7 @@
             <p>Quantité consommée 4 (en g) <br> <input type="text" id="IDquantite4" name="quantite4"> </p>
             <p><button type="submit">Submit</button></p>
         </form>
+
+       
     </div>
-</div>  
+</div> 
