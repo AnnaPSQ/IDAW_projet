@@ -3,7 +3,7 @@
     try{
                 $dbco = new PDO("mysql:host=$servname;dbname=$dbname;charset=utf8", $user, $pass);
                 $dbco->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $infosAliments = $dbco->prepare("SELECT Nom, Type, En.Ratio AS Energie, Pro.Ratio AS Proteines, Glu.Ratio As Glucides, Lip.Ratio As Lipides, Suc.Ratio As Sucres, Cho.Ratio As Cholesterol, Cal.Ratio As Calcium, Fer.Ratio As Fer, Mag.Ratio As Magnesium, Pho.Ratio As Phosphore, Pot.Ratio As Potassium, Sod.Ratio As Sodium FROM `aliments` 
+                $infosAliments = $dbco->prepare("SELECT aliments.ID_aliments AS ID, Nom, Type, En.Ratio AS Energie, Pro.Ratio AS Proteines, Glu.Ratio As Glucides, Lip.Ratio As Lipides, Suc.Ratio As Sucres, Cho.Ratio As Cholesterol, Cal.Ratio As Calcium, Fer.Ratio As Fer, Mag.Ratio As Magnesium, Pho.Ratio As Phosphore, Pot.Ratio As Potassium, Sod.Ratio As Sodium FROM `aliments` 
                 LEFT JOIN a_pour_apport AS En ON aliments.ID_aliments = En.ID_aliments AND En.ID_apport=1 
                 LEFT JOIN a_pour_apport AS Pro ON aliments.ID_aliments = Pro.ID_aliments AND Pro.ID_apport=3
                 LEFT JOIN a_pour_apport AS Glu ON aliments.ID_aliments = Glu.ID_aliments AND Glu.ID_apport=4

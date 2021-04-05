@@ -66,7 +66,6 @@
             
             function onFormSubmit(){
                 event.preventDefault();
-
                 let login_value = $("input[name='login']").val();
                 AjaxAfficheRepas(login_value);
             }

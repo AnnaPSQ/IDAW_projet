@@ -27,7 +27,7 @@
         </table>
 
         <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off">
-            <p>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
+            <p id = debut-form>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
             <p>Type <br> <input type="text" id="IDtype" name="type"></p>
             <p>Energie (de type decimal: x.y) <br> <input type="text" id="IDenergie" name="energie"> </p>
             <p>Protéines (de type decimal: x.y) <br> <input type="text" id="IDproteines" name="proteines"> </p>
@@ -87,6 +87,60 @@
                     });
             }
 
+            function AjaxAfficheAliment(){
+                $.ajax({
+                type: 'GET',
+                url: urlBackendPrefix+"api/aliments/afficheAliment.php",
+                mimeType: 'json',
+                success: function(data) {
+                    $.each(data, function(i, data) {
+                        var body = "<tr id = aliments-" + data.ID + ">";
+                        body    += "<td>" + data.Nom + "</td>";
+                        body    += "<td>" + data.Type + "</td>";
+                        body    += "<td>" + data.Energie + "</td>";
+                        body    += "<td>" + data.Proteines + "</td>";
+                        body    += "<td>" + data.Glucides + "</td>";
+                        body    += "<td>" + data.Lipides + "</td>";
+                        body    += "<td>" + data.Sucres + "</td>";
+                        body    += "<td>" + data.Cholesterol + "</td>";
+                        body    += "<td>" + data.Calcium + "</td>";
+                        body    += "<td>" + data.Fer + "</td>";
+                        body    += "<td>" + data.Magnesium + "</td>";
+                        body    += "<td>" + data.Phosphore + "</td>";
+                        body    += "<td>" + data.Potassium + "</td>";
+                        body    += "<td>" + data.Sodium + "</td>";
+                        if (data.ID > 113){
+                            body += "<td> <button onclick=\"edit("+data.ID+")\" style=\"color:blue\">Edit</button>  <button onclick=\"remove("+data.ID+")\" style=\"color:blue\">Remove</button> </td>";
+                        }
+                        body    += "</tr>";
+                        $( "#table-CRUD tbody" ).append(body);
+                        currentMaxId++;
+                        let newFood = {};
+                        newFood.id = data.ID;
+                        newFood.nom = data.Nom;
+                        newFood.type = data.Type;
+                        newFood.energie = data.Energie;     
+                        newFood.proteines = data.Proteines;
+                        newFood.glucides = data.Glucides;
+                        newFood.lipides = data.Lipides;
+                        newFood.sucres = data.Sucres;
+                        newFood.cholesterol = data.Cholesterol;
+                        newFood.calcium = data.Calcium;
+                        newFood.fer = data.Fer;
+                        newFood.magnesium = data.Magnesium;
+                        newFood.phosphore = data.Phosphore;
+                        newFood.potassium = data.Potassium;
+                        newFood.sodium = data.Sodium;
+                        aliments.push(newFood);
+                    });
+                    $( "#table-CRUD" ).DataTable();
+                },
+                error: function() {
+                    alert('Fail!');
+                }
+                });
+            }
+
             function onForm(nom,type,energie,proteines,glucides, lipides, sucres, cholesterol, calcium, fer, magnesium, phosphore, potassium, sodium){
                 $("#IDnom").val(nom);
                 $("#IDtype").val(type);
@@ -107,20 +161,20 @@
 
             function edit(id){
                 currentEditedFoodId = id;
-                onForm(aliments[currentEditedFoodId-1].Nom,
-                        aliments[currentEditedFoodId-1].Type,
-                        aliments[currentEditedFoodId-1].Energie,
-                        aliments[currentEditedFoodId-1].Proteines,
-                        aliments[currentEditedFoodId-1].Glucides,
-                        aliments[currentEditedFoodId-1].Lipides,
-                        aliments[currentEditedFoodId-1].Sucres,
-                        aliments[currentEditedFoodId-1].Cholesterol,
-                        aliments[currentEditedFoodId-1].Calcium,
-                        aliments[currentEditedFoodId-1].Fer,
-                        aliments[currentEditedFoodId-1].Magnesium,
-                        aliments[currentEditedFoodId-1].Phosphore,
-                        aliments[currentEditedFoodId-1].Potassium,
-                        aliments[currentEditedFoodId-1].Sodium,
+                onForm(aliments[currentEditedFoodId-1].nom,
+                        aliments[currentEditedFoodId-1].type,
+                        aliments[currentEditedFoodId-1].energie,
+                        aliments[currentEditedFoodId-1].proteines,
+                        aliments[currentEditedFoodId-1].glucides,
+                        aliments[currentEditedFoodId-1].lipides,
+                        aliments[currentEditedFoodId-1].sucres,
+                        aliments[currentEditedFoodId-1].cholesterol,
+                        aliments[currentEditedFoodId-1].calcium,
+                        aliments[currentEditedFoodId-1].fer,
+                        aliments[currentEditedFoodId-1].magnesium,
+                        aliments[currentEditedFoodId-1].phosphore,
+                        aliments[currentEditedFoodId-1].potassium,
+                        aliments[currentEditedFoodId-1].sodium,
 
                     );
 
@@ -153,7 +207,7 @@
                 newFood.potassium = $("#IDpotassium").val();
                 newFood.sodium = $("#IDsodium").val();
                 $("p").remove("#contenu-removable");
-                if (newFood.nom != ''){
+                if (newFood.nom != '' && newFood.type != '' && newFood.energie != '' && newFood.proteines != '' && newFood.glucides != '' && newFood.lipides != '' && newFood.sucres != '' && newFood.cholesterol != '' && newFood.calcium != ''  && newFood.fer != '' && newFood.magnesium != '' && newFood.phosphore != '' && newFood.potassium != '' && newFood.sodium != ''){
                     if (currentEditedFoodId >= 0){
                         editAliment(newFood);
                         AjaxChangeAliment(newFood);
@@ -168,7 +222,7 @@
                     }
                 }
                 else{
-                    $("#contenu-nom").before("<p id=\"contenu-removable\" style=\"color:red\"> Ce champ doit être renseigné </p>");
+                    $("#debut-form").before("<p id=\"contenu-removable\" style=\"color:red\"> Tous les champs doivent être renseignés </p>");
                 }
             }
             
@@ -176,7 +230,7 @@
 
             function ajouteAliment(newFood){
                 newFood.id = currentMaxId;
-                $("#table-CRUD").append
+                $("#table-CRUD tbody").append
                         (`<tr id=aliments-${newFood.id}> 
                         <td> ${newFood.nom}  </td> <td> 
                         ${newFood.type}  </td> <td> 
@@ -225,28 +279,7 @@
 
                     
             $(document).ready(function(){
-                $.getJSON(urlBackendPrefix+"api/aliments/afficheAliment.php", function(data){ 
-                    aliments = data;
-                    $.each(aliments, function(i, a){
-                        let aliment = {};
-                        aliment.nom = a.Nom;
-                        aliment.type = a.Type; 
-                        aliment.energie = a.Energie;
-                        aliment.proteines = a.Proteines;
-                        aliment.glucides = a.Glucides;
-                        aliment.lipides = a.Lipides;
-                        aliment.sucres = a.Sucres;
-                        aliment.cholesterol = a.Cholesterol;
-                        aliment.calcium = a.Calcium;
-                        aliment.fer = a.Fer;
-                        aliment.magnesium = a.Magnesium;
-                        aliment.phosphore = a.Phosphore;
-                        aliment.potassium = a.Potassium;
-                        aliment.sodium = a.Sodium;
-                        ajouteAliment(aliment);
-                    });
-                    $("#table-CRUD").DataTable();
-                });
+                AjaxAfficheAliment();
             });
        
         </script>
