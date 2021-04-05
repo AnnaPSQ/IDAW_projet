@@ -1,4 +1,5 @@
 let repas = [];
+let apports =[];
 let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";          
                 
 function AjaxAfficheRepas(login){
@@ -35,21 +36,10 @@ function AjaxAfficheApports(login, periode){
     $.ajax({
         url: urlBackendPrefix+"api/journal/afficheApports.php?id_login='"+login+"'&id_periode='"+periode+"'",
         type: 'GET',
-        dataType: 'json',
+        // dataType: 'json',
         success : function(data){
             console.log('success');
-            apports = data;
-            $.each(repas, function(i,r){
-                let unRepas = {};
-                unRepas.id_repas = r.ID_repas;
-                unRepas.date = r.Date;
-                unRepas.type_repas = r.Type_repas;
-                unRepas.type_aliment = r.Type;
-                unRepas.nom_aliment = r.Nom;
-                unRepas.quantite = r.Quantite;
-                // console.log(unRepas);
-                ajouteRepasTable(unRepas);
-            });
+            console.log(data);
         },
         error : function(data, statut, error){
         console.log(data);
@@ -79,13 +69,14 @@ function onFormSubmitRepas(){
     AjaxAfficheRepas(login_value);
 }
 
-function onFormSubmitApport(){
+function onFormSubmitApports(){
     event.preventDefault();
 
-    let apports= {};
-    apports.login = $("input[name='login']").val();
-    apports.periode = $('#IDperiode').val();
-    AjaxAfficheApports(apports.login, apports.periode);
+    let login_value = $('#IDlogin2').val();
+    let periode_value = $('#IDperiode').val();
+    console.log(login_value);
+    console.log(periode_value);
+    AjaxAfficheApports(login_value, periode_value);
     console.log(apports);          
 
 }

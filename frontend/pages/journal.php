@@ -33,15 +33,15 @@
             </form>
             
             <h2> Afficher vos apports ! </h2>
-            <form id="AfficheApports"  autocomplete="off" method="GET">
-                <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
-                <label for="searchDuree" class="col">Période</label>
-                    <select id="IDperiode" name="periode">
+            <form id="AfficheApports" autocomplete="off" method="GET">
+                <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin2" name="login2"> </p>
+                <label >Période</label>
+                    <select id="IDperiode" name="IDperiode">
                         <option value="jour">Jour</option>
                         <option value="semaine">Semaine</option>
                         <option value="mois">Mois</option>
                     <select>
-                <p><button onClick="onFormSubmitApports();">Submit</button></p>
+                <p><button onClick = "onFormSubmitApports();">Submit</button></p>
             </form>
             
         </div>
