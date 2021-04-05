@@ -13,13 +13,13 @@
                     <th>Glucides (g/100g) </th>
                     <th>Lipides (g/100g)</th>
                     <th>Sucres (g/100g) </th>
-                    <th>Cholestérol (g/100g)</th>
-                    <th>Calcium (g/100g)</th>
-                    <th>Fer (g/100g)</th>
-                    <th>Magnésium (g/100g)</th>
-                    <th>Phosphore (g/100g)</th>
-                    <th>Potassium (g/100g)</th>
-                    <th>Sodium (g/100g)</th>
+                    <th>Cholestérol (mg/100g)</th>
+                    <th>Calcium (mg/100g)</th>
+                    <th>Fer (mg/100g)</th>
+                    <th>Magnésium (mg/100g)</th>
+                    <th>Phosphore (mg/100g)</th>
+                    <th>Potassium (mg/100g)</th>
+                    <th>Sodium (mg/100g)</th>
                 </tr>
             </thead>
 

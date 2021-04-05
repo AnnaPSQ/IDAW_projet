@@ -26,8 +26,6 @@
         
     //     // variables GET: $_GET['id_periode'] et $_GET['id_login']
         if (isset($_GET['id_login']) && isset($_GET['id_periode'])){
-            print_r($_GET);
-            print_r($_GET['id_periode']);
             if ($_GET['id_periode']=="'jour'"){
                 $resultat["Energie"]=getApports($_GET['id_login'],'Energie',1);
                 $resultat["Proteines"]=getApports($_GET['id_login'],'Protéines',1);

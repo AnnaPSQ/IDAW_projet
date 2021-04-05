@@ -24,6 +24,29 @@
                 </tbody>
             </table>
 
+            <table class = "tableau-formulaire" >
+                <thead>
+                    <tr>
+                        <th>Energie (kcal)</th>
+                        <th>Protéines (g) </th>
+                        <th>Glucides (g) </th>
+                        <th>Lipides (g) </th>
+                        <th>Sucres (g) </th>
+                        <th>Cholestérol (mg)</th>
+                        <th>Calcium (mg)</th>
+                        <th>Fer (mg)</th>
+                        <th>Magnésium (mg)</th>
+                        <th>Phosphore (mg)</th>
+                        <th>Potassium (mg)</th>
+                        <th>Sodium (mg)</th>
+                    </tr>
+                </thead>
+
+                <tbody id="table-content-apports">
+
+                </tbody>
+            </table>
+
 
             <h2> Afficher vos repas ! </h2>
             <form id="AfficheRepas"  autocomplete="off" method="GET">
