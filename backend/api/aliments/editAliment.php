@@ -66,10 +66,10 @@
                 $dbco -> exec($query12);
 
                 
-                // $query13 = "UPDATE aliments
-                //            SET Nom = '$_POST[nom]' AND Type = '$_POST[type]'
-                //            WHERE ID_aliments = '$_POST[id]'" ;
-                // $dbco -> exec($query13);
+                $query13 = "UPDATE aliments
+                           SET Nom = '$_POST[nom]' AND Type = '$_POST[type]'
+                           WHERE ID_aliments = '$_POST[id]'" ;
+                $dbco -> exec($query13);
 
                 
             }
