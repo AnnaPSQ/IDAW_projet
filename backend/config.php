@@ -1,3 +1,1 @@
-Renseigne les modifications que doit apporter le prof pour adapter le projet à sa machine
-
-Par exemple urlbackend.
+Pour utiliser ce code, il faut changer les url (des urlBackendPrefix sont souvent mis en début de code et doivent être changés).
