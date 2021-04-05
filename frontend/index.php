@@ -13,7 +13,7 @@
     }
 
     require_once("../backend/ConnexionSession/connected.php");
-    require_once("header.php");
+    require_once("teamplate/header.php");
 
     
     if ($_SESSION == array()){
@@ -25,7 +25,7 @@
         echo "<a href=\"../backend/ConnexionSession/deconnexion.php\"><button type=\"button\">Déconnexion</button></a></center> <br><br>";
     }
 
-    require_once("menu.php");
+    require_once("teamplate/menu.php");
 
     renderMenuToHTML($currentPageId, $currentLangId);
 
@@ -33,7 +33,7 @@
 <section class="corps">
 
 <?php   
-    $pageToInclude = "$currentPageId.php";
+    $pageToInclude = "pages/$currentPageId.php";
     if(is_readable($pageToInclude)){
         require_once($pageToInclude);
     }
@@ -44,5 +44,5 @@
 
 </section>
 <?php
-    require_once("footer.php");
+    require_once("teamplate/footer.php");
 ?>

@@ -1,50 +1,3 @@
-        <div class="conteneur-flexible ligne ">
-            <div class="element-flexible bleu-clair element-hw-autres"> <center> <h2> CRUD <h2> </center>  
-            
-        <table id = "table-CRUD" class = "display" class="width:100%">
-            <thead>
-                <tr>
-                    <th>Nom de l'aliment </th>
-                    <th>Type </th>
-                    <th>Energie (kcal/100g) </th>
-                    <th>Protéines (g/100g) </th>
-                    <th>Glucides (g/100g) </th>
-                    <th>Lipides (g/100g)</th>
-                    <th>Sucres (g/100g) </th>
-                    <th>Cholestérol (g/100g)</th>
-                    <th>Calcium (g/100g)</th>
-                    <th>Fer (g/100g)</th>
-                    <th>Magnésium (g/100g)</th>
-                    <th>Phosphore (g/100g)</th>
-                    <th>Potassium (g/100g)</th>
-                    <th>Sodium (g/100g)</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-            </tbody>
-        </table>
-
-        <form id="AddFoodForm" onsubmit="onFormSubmit();" autocomplete="off">
-            <p id = debut-form>Nom de l'aliment <br id="contenu-nom"> <input type="text" id="IDnom" name="nom"></p>
-            <p>Type <br> <input type="text" id="IDtype" name="type"></p>
-            <p>Energie (de type decimal: x.y) <br> <input type="text" id="IDenergie" name="energie"> </p>
-            <p>Protéines (de type decimal: x.y) <br> <input type="text" id="IDproteines" name="proteines"> </p>
-            <p>Glucides (de type decimal: x.y) <br> <input type="text" id="IDglucides" name="glucides"> </p>
-            <p>Lipides (de type decimal: x.y) <br> <input type="text" id="IDlipides" name="lipides"> </p>
-            <p>Sucres (de type decimal: x.y) <br> <input type="text" id="IDsucres" name="sucres"> </p>
-            <p>Cholestérol (de type decimal: x.y) <br> <input type="text" id="IDcholesterol" name="cholesterol"> </p>
-            <p>Calcium (de type decimal: x.y) <br> <input type="text" id="IDcalcium" name="calcium"> </p>
-            <p>Fer (de type decimal: x.y) <br> <input type="text" id="IDfer" name="fer"> </p>
-            <p>Magnésium (de type decimal: x.y) <br> <input type="text" id="IDmagnesium" name="magnesium"> </p>
-            <p>Phosphore (de type decimal: x.y) <br> <input type="text" id="IDphosphore" name="phosphore"> </p>
-            <p>Potassium (de type decimal: x.y) <br> <input type="text" id="IDpotassium" name="potassium"> </p>
-            <p>Sodium (de type decimal: x.y) <br> <input type="text" id="IDsodium" name="sodium"> </p>
-            <p><button type="submit">Submit</button></p>
-        </form>
-
-        <script>
             let currentMaxId = 1; 
             let aliments = [];
             let currentEditedFoodId =-1;
@@ -187,45 +140,6 @@
                 AjaxSupprimeAliment(id);
             }
             
-    
-
-            function onFormSubmit(){
-                event.preventDefault();
-                let newFood = {};
-                newFood.nom = $("#IDnom").val();
-                newFood.type = $("#IDtype").val();
-                newFood.energie = $("#IDenergie").val();
-                newFood.proteines = $("#IDproteines").val();
-                newFood.glucides = $("#IDglucides").val();
-                newFood.lipides = $("#IDlipides").val();
-                newFood.sucres = $("#IDsucres").val();
-                newFood.cholesterol = $("#IDcholesterol").val();
-                newFood.calcium = $("#IDcalcium").val();
-                newFood.fer = $("#IDfer").val();
-                newFood.magnesium = $("#IDmagnesium").val();
-                newFood.phosphore = $("#IDphosphore").val();
-                newFood.potassium = $("#IDpotassium").val();
-                newFood.sodium = $("#IDsodium").val();
-                $("p").remove("#contenu-removable");
-                if (newFood.nom != '' && newFood.type != '' && newFood.energie != '' && newFood.proteines != '' && newFood.glucides != '' && newFood.lipides != '' && newFood.sucres != '' && newFood.cholesterol != '' && newFood.calcium != ''  && newFood.fer != '' && newFood.magnesium != '' && newFood.phosphore != '' && newFood.potassium != '' && newFood.sodium != ''){
-                    if (currentEditedFoodId >= 0){
-                        editAliment(newFood);
-                        AjaxChangeAliment(newFood);
-                        currentFoodId = -1;
-                        onForm("","","","","","","","","","","","","","");
-                    }
-                    else{
-                        aliments.push(newFood);
-                        ajouteAliment(newFood);
-                        AjaxEnvoieAliment(newFood);
-                        onForm("","","","","","","","","","","","","","");
-                    }
-                }
-                else{
-                    $("#debut-form").before("<p id=\"contenu-removable\" style=\"color:red\"> Tous les champs doivent être renseignés </p>");
-                }
-            }
-            
             
 
             function ajouteAliment(newFood){
@@ -277,11 +191,46 @@
                         <button onclick="edit(${newFood.id})" style="color:blue">Edit</button>  <button onclick="remove(${newFood.id})" style="color:blue">Remove</button> </td>`);
             }
 
+            
+            function onFormSubmit(){
+                event.preventDefault();
+                let newFood = {};
+                newFood.nom = $("#IDnom").val();
+                newFood.type = $("#IDtype").val();
+                newFood.energie = $("#IDenergie").val();
+                newFood.proteines = $("#IDproteines").val();
+                newFood.glucides = $("#IDglucides").val();
+                newFood.lipides = $("#IDlipides").val();
+                newFood.sucres = $("#IDsucres").val();
+                newFood.cholesterol = $("#IDcholesterol").val();
+                newFood.calcium = $("#IDcalcium").val();
+                newFood.fer = $("#IDfer").val();
+                newFood.magnesium = $("#IDmagnesium").val();
+                newFood.phosphore = $("#IDphosphore").val();
+                newFood.potassium = $("#IDpotassium").val();
+                newFood.sodium = $("#IDsodium").val();
+                $("p").remove("#contenu-removable");
+                if (newFood.nom != '' && newFood.type != '' && newFood.energie != '' && newFood.proteines != '' && newFood.glucides != '' && newFood.lipides != '' && newFood.sucres != '' && newFood.cholesterol != '' && newFood.calcium != ''  && newFood.fer != '' && newFood.magnesium != '' && newFood.phosphore != '' && newFood.potassium != '' && newFood.sodium != ''){
+                    if (currentEditedFoodId >= 0){
+                        editAliment(newFood);
+                        AjaxChangeAliment(newFood);
+                        currentFoodId = -1;
+                        onForm("","","","","","","","","","","","","","");
+                    }
+                    else{
+                        aliments.push(newFood);
+                        ajouteAliment(newFood);
+                        AjaxEnvoieAliment(newFood);
+                        onForm("","","","","","","","","","","","","","");
+                    }
+                }
+                else{
+                    $("#debut-form").before("<p id=\"contenu-removable\" style=\"color:red\"> Tous les champs doivent être renseignés </p>");
+                }
+            }
+
                     
             $(document).ready(function(){
                 AjaxAfficheAliment();
             });
        
-        </script>
-            </div>
-        </div>        
