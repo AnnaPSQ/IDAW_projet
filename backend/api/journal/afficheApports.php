@@ -6,18 +6,19 @@
     
     require_once("../databaseConnection.php");
 
-    function getRepas($login){
+    function getApports($login, $apport, $periode){
         $dbco=databaseConnection();
-
-        $infosRepas = $dbco->prepare
-        ("SELECT  repas.ID_repas, repas.Date, repas.Type_repas, aliments.Type, aliments.Nom, comporte.Quantite 
-        FROM utilisateurs
-        JOIN repas ON utilisateurs.Login = repas.Login 
-        JOIN comporte ON comporte.ID_Repas = repas.ID_repas 
-        JOIN aliments ON aliments.ID_aliments = comporte.ID_aliments
-        WHERE utilisateurs.Login = ".$login);
-        $infosRepas->execute();
-        return($infosRepas);
+        
+        $infosApports = $dbco -> prepare
+        ("SELECT *, (a_pour_apport.Ratio/100) * comporte.Quantite AS 'ApportTotal'
+        FROM `apport` 
+        JOIN a_pour_apport ON apport.ID_apport = a_pour_apport.ID_apport
+        JOIN aliments ON a_pour_apport.ID_aliments = aliments.ID_aliments
+        JOIN comporte ON aliments.ID_aliments = comporte.ID_aliments
+        JOIN repas ON comporte.ID_repas = repas.ID_repas
+        WHERE repas.Login = ".$login. "AND apport.Apport =". $apport. "AND repas.Date BETWEEN CURDATE() - INTERVAL". $periode." DAY AND CURDATE()";)
+        $infosApports->execute();
+        return($infosApports);
     }
 
 
