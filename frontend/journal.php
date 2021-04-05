@@ -1,8 +1,9 @@
+<center>
 <div class="conteneur-flexible ligne ">
 <!-- page affichant son journal avec possibilité d’ajouter une entrée (repas)
  résumé des repas, formulaire renseignement repas et comporte -->
     <div class="element-flexible bleu-clair element-hw-autres"> 
-        <center> <h2> Journal <h2> </center> 
+        <h2> Journal <h2>  
         <p> Vous trouverez ici toutes les informations sur votre alimentations ! </p>
 
         <table class = "tableau-formulaire">
@@ -22,11 +23,15 @@
             </tbody>
         </table>
 
+
+        <h2> Afficher vos repas ! </h2>
         <form id="AfficheRepas"  autocomplete="off" method="GET">
-            <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
-            <p>Date (optionnel) <br id="contenu-date"> <input type="date" id="IDdate" name="date"></p>
-            <p><button onClick="onFormSubmit();">Submit</button></p>
+        <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
+        <p>Date (optionnel) <br id="contenu-date"> <input type="date" id="IDdate" name="date"></p>
+        <p><button onClick="onFormSubmit();">Submit</button></p>
         </form>
+        
+        <h2>
 
         <script>
             
@@ -57,7 +62,7 @@
                     error : function(data, statut, error){
                     console.log(data);
                     console.log(statut);
-                    console.log("bande de nuls"+error);
+                    console.log(error);
                     }
                 });
             }
@@ -85,3 +90,4 @@
         </script>
     </div>
 </div>  
+</center>
