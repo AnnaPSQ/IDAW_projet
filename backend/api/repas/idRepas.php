@@ -15,7 +15,6 @@
 
     if($_SERVER['REQUEST_METHOD'] == 'GET'){
         $resultat=getIdRepas();
-        $retour = $resultat->fetchAll(PDO::FETCH_ASSOC);
+        $retour = $resultat->fetchColumn();
         echo json_encode($retour);
-        print_r($retour);
     }

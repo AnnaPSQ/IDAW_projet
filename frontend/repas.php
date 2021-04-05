@@ -7,7 +7,7 @@
         <form id="AddMealForm" onsubmit="onFormSubmit();" autocomplete="off" method="POST">
             <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
             <p>Date du repas <br id="contenu-date"> <input type="datetime-local" id="IDdate" name="date"></p>
-            <p>Type (Petit déjeuner, déjeuner, goûter, dinner) <br id="contenu-type"> <input type="text" id="IDtype_repas" name="type_repas"></p>
+            <p>Type (Petit déjeuner, déjeuner, goûter, diner) <br id="contenu-type"> <input type="text" id="IDtype_repas" name="type_repas"></p>
             <p>Aliment 1 (id)<br id="contenu-conso1"> <input type="text" id="IDconsommation1" name="consommation1"> </p>
             <p>Quantité consommée 1 (en g) <br id="contenu-quantite1"> <input type="text" id="IDquantite1" name="quantite1"> </p>
             <p>Aliment 2 (id)<br> <input type="text" id="IDconsommation2" name="consommation2"> </p>
@@ -23,20 +23,21 @@
             
             let repas = [];
             let urlBackendPrefix = "http://localhost/IDAW_projet/IDAW_projet/backend/";
-            let currentMaxIdRepas = -1; 
+            let currentMaxIdRepas = ""; 
 
             function AjaxIDRepas(){
                 
                 $.ajax({
-                    url: urlBackendPrefix+"repas/idRepas.php",
+                    url: urlBackendPrefix+"api/repas/idRepas.php",
                     type: 'GET',
-                    dataType: 'json',
+                    // dataType: 'json',
                     success : function(data){
                         console.log('success');
                         console.log(data);
-                        IDrepas = data[0]['COUNT(*)'];
+                        IDrepas = data;
+                        // ['COUNT(*)'];
                         console.log(IDrepas);
-                        currentMaxIdRepas = IDrepas;
+                        ChangeValeurCurrentMaxIdRepas(IDrepas);
                     },
                     error : function(data, statut, error){
                     console.log(data);
@@ -45,11 +46,11 @@
                     }
                 });
             }
-
+            
             function AjaxEnvoieRepas(repas){
                 $.ajax({
                         //L'URL de la requête 
-                        url: urlBackendPrefix+"repas/addRepas.php",
+                        url: urlBackendPrefix+"api/repas/addRepas.php",
 
                         //La méthode d'envoi (type de requête)
                         method: "POST",
@@ -64,6 +65,13 @@
                     .always(function(response){
                         console.log(response);
                     });
+            }
+
+            function ChangeValeurCurrentMaxIdRepas(IDrepas){
+                console.log('Les deux val');
+                console.log(IDrepas);
+                currentMaxIdRepas = parseInt(IDrepas,10);
+                console.log(currentMaxIdRepas);
             }
 
             function onForm(login,date,type,aliment1,quantite1,aliment2,quantite2,aliment3,quantite3,aliment4,quantite4){
@@ -122,6 +130,7 @@
 
             $(document).ready(function(){
                 AjaxIDRepas();
+                
             });
             
         </script>

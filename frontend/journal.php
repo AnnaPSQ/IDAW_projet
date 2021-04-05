@@ -47,7 +47,7 @@
             function AjaxAfficheRepas(login){
                 
                 $.ajax({
-                    url: urlBackendPrefix+"journal/afficheRepas.php?id_login='"+login+"'",
+                    url: urlBackendPrefix+"api/journal/afficheRepas.php?id_login='"+login+"'",
                     type: 'GET',
                     dataType: 'json',
                     success : function(data){
@@ -73,18 +73,10 @@
                 });
             }
 
-<<<<<<< HEAD
-
-            
-            function onFormSubmit(){
-                event.preventDefault();
-                let login_value = $("input[name='login']").val();
-                AjaxAfficheRepas(login_value);
-=======
             function AjaxAfficheApports(login, periode){
                 
                 $.ajax({
-                    url: urlBackendPrefix+"journal/afficheApports.php?id_login='"+login+"'&id_periode='"+periode+"'",
+                    url: urlBackendPrefix+"api/journal/afficheApports.php?id_login='"+login+"'&id_periode='"+periode+"'",
                     type: 'GET',
                     dataType: 'json',
                     success : function(data){
@@ -108,7 +100,6 @@
                     console.log(error);
                     }
                 });
->>>>>>> 7d3aa1525caf669068a8b12284836321159600fe
             }
 
             function ajouteRepasTable(repasAd){
