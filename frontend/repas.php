@@ -112,8 +112,6 @@
                             currentMaxIdRepas ++;
                         }
                         else{
-                            //aliments.push(newFood);
-                            //ajouteAliment(newFood);
                             AjaxEnvoieRepas(newMeal);
                             onForm("","","","","","","","","","","");
                             $("#AddMealForm").before("<p id=\"contenu-removable0\" style=\"color:green\"> Votre repas a bien été ajouté à la base </p>");
