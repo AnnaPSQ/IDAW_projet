@@ -28,7 +28,7 @@
         <form id="AfficheRepas"  autocomplete="off" method="GET">
         <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
         <p>Date (optionnel) <br id="contenu-date"> <input type="date" id="IDdate" name="date"></p>
-        <p><button onClick="onFormSubmit();">Submit</button></p>
+        <p><button onClick="onFormSubmitRepas();">Submit</button></p>
         </form>
         
         <h2> Afficher vos apport ! </h2>
@@ -37,6 +37,7 @@
             <input type="checkbox" id="IDjour" name="jour"> <label for="Jour">Du jour</label>
             <input type="checkbox" id="IDsemaine" name="semaine"> <label for="Semaine">De la semaine</label>
             <input type="checkbox" id="IDmois" name="mois"> <label for="Mois">Du mois</label>
+            <p><button onClick="onFormSubmitApports();">Submit</button></p>
         </form>
         <script>
             
@@ -72,13 +73,33 @@
                 });
             }
 
-
-            
-            function onFormSubmit(){
-                event.preventDefault();
-
-                let login_value = $("input[name='login']").val();
-                AjaxAfficheRepas(login_value);
+            function AjaxAfficheApports(login, periode){
+                
+                $.ajax({
+                    url: urlBackendPrefix+"journal/afficheApports.php?id_login='"+login+"'&id_periode='"+periode+"'",
+                    type: 'GET',
+                    dataType: 'json',
+                    success : function(data){
+                        console.log('success');
+                        repas = data;
+                        $.each(repas, function(i,r){
+                            let unRepas = {};
+                            unRepas.id_repas = r.ID_repas;
+                            unRepas.date = r.Date;
+                            unRepas.type_repas = r.Type_repas;
+                            unRepas.type_aliment = r.Type;
+                            unRepas.nom_aliment = r.Nom;
+                            unRepas.quantite = r.Quantite;
+                            // console.log(unRepas);
+                            ajouteRepasTable(unRepas);
+                        });
+                    },
+                    error : function(data, statut, error){
+                    console.log(data);
+                    console.log(statut);
+                    console.log(error);
+                    }
+                });
             }
 
             function ajouteRepasTable(repasAd){
@@ -92,6 +113,36 @@
                         ${repasAd.nom_aliment} </td> <td>
                         ${repasAd.quantite}  </td> </tr> `)
             }
+
+            
+            function onFormSubmitRepas(){
+                event.preventDefault();
+
+                let login_value = $("input[name='login']").val();
+                AjaxAfficheRepas(login_value);
+            }
+
+            function onFormSubmitApport(){
+                event.preventDefault();
+
+                let apports= {};
+                apports.login = $("input[name='login']").val();
+                apports.periode = "jour"
+                if  ($("#Jour").prop("checked")){
+                    apports.periode = "jour";
+                }
+                else if  ($("#Semaine").prop("checked")){
+                    apports.periode = "semaine";
+                }
+                else if  ($("#Mois").prop("checked")){
+                    apports.periode = "mois";
+                }
+                AjaxAfficheApports(apports.login, apports.periode);          
+
+            }
+
+
+
         </script>
     </div>
 </div>  
