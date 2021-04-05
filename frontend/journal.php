@@ -31,8 +31,13 @@
         <p><button onClick="onFormSubmit();">Submit</button></p>
         </form>
         
-        <h2>
-
+        <h2> Afficher vos apport ! </h2>
+        <form id="AfficheApports"  autocomplete="off" method="GET">
+            <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
+            <input type="checkbox" id="IDjour" name="jour"> <label for="Jour">Du jour</label>
+            <input type="checkbox" id="IDsemaine" name="semaine"> <label for="Semaine">De la semaine</label>
+            <input type="checkbox" id="IDmois" name="mois"> <label for="Mois">Du mois</label>
+        </form>
         <script>
             
             let repas = [];
