@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation API</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+  </head>
+  <body>
+    <div class="container justify-content-center">
+      <h1>iMangerMieux API</h1>
+
+      <h2>API utilisé</h2>
+      <div>
+        <ul>
+          <li>apports</li>
+          <li>aliments</li>
+          <li>repas</li>
+        </ul>
+      </div>
+
+      <h2>Fonctions</h2>
+      <h3>Pour les aliments</h3>
+      <div class="col-4">
+        Récupérer et afficher tous les aliments
+        <p class="bg-dark text-white">
+          - GET / aliments (avec afficheAliment)
+        </p>
+      <div class="col-4">
+        Ajouter un aliment
+        <p class="bg-dark text-white">
+          - POST /aliments (avec addAliment)
+        </p>
+      </div>
+      <div class="col-4">
+        Modifier un aliment
+        <p class="bg-dark text-white">
+          - POST /aliments (avec editAliment)
+        </p>
+      </div>
+      <div class="col-4">
+        Supprimer un aliment
+        <p class="bg-dark text-white">
+          - POST /aliments (avec deleteAliment)
+        </p>
+      </div>
+
+    <h3>Pour les repas</h3>
+    <div class="col-4">
+      Récupérer et afficher tous les repas
+      <p class="bg-dark text-white">
+        - GET /repas (avec afficheRepas)
+      </p>
+    </div>
+    <div class="col-4">
+      Ajouter un repas
+      <p class="bg-dark text-white">
+        - POST /repas (avec addRepas)
+      </p>
+    </div>
+
+    <h3>Pour les apports</h3>
+    <div class="col-4">
+      Récupérer et afficher tous les apports
+      <p class="bg-dark text-white">
+        - GET /apports (avec afficheApports)
+      </p>
+    </div>
+
+
