@@ -4,7 +4,7 @@
     $la = 0;
     $mymenu = array(
         // idPage titre
-        'index' => array('Accueil', 'Welcome'),
+        // 'index' => array('Accueil', 'Welcome'),
         'repas' =>  array('Repas', 'Meal'),
         'journal' => array('Journal', 'Journal'),
         'CRUD' => array('CRUD', 'CRUD'),

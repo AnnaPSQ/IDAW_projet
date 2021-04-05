@@ -5,7 +5,7 @@
     <div class="conteneur-flexible ligne ">
         <div class="element-flexible bleu-clair element-hw-autres"> 
             <h2> Journal <h2>  
-            <p> Vous trouverez ici toutes les informations sur votre alimentations ! </p>
+            <p> Vous trouverez ici toutes les informations sur votre alimentation ! </p>
 
             <table class = "tableau-formulaire">
                 <thead>
@@ -48,14 +48,14 @@
             </table>
 
 
-            <h2> Afficher vos repas ! </h2>
+            <h2> Affichez vos repas ! </h2>
             <form id="AfficheRepas"  autocomplete="off" method="GET">
             <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin" name="login"> </p>
             <p>Date (optionnel) <br id="contenu-date"> <input type="date" id="IDdate" name="date"></p>
             <p><button onClick="onFormSubmitRepas();">Submit</button></p>
             </form>
             
-            <h2> Afficher vos apports ! </h2>
+            <h2> Affichez vos apports ! </h2>
             <form id="AfficheApports" autocomplete="off" method="GET">
                 <p>Login (email)<br id="contenu-login"> <input type="text" id="IDlogin2" name="login2"> </p>
                 <label >Période</label>

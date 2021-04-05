@@ -58,7 +58,7 @@ function AjaxAfficheApports(login, periode){
             renseignements.Sodium = apports['Sodium'][0].ApportTotal;
             console.log('renseignements');
             console.log(renseignements);
-            ajouteRepasTable(renseignements);
+            ajouteApportsTable(renseignements);
         },
         error : function(data, statut, error){
         console.log(data);
@@ -72,7 +72,7 @@ function AjaxAfficheApports(login, periode){
 function ajouteRepasTable(repasAd){
                     
     $("#table-content").append
-            (`<tr id=aliments-${repasAd.id_repas}> <td> 
+            (`<tr> <td> 
             ${repasAd.id_repas}  </td> <td> 
             ${repasAd.date}  </td> <td> 
             ${repasAd.type_repas}  </td> <td> 
@@ -81,7 +81,7 @@ function ajouteRepasTable(repasAd){
             ${repasAd.quantite}  </td> </tr> `)
 }
 
-function ajouteRepasTable(renseignements){
+function ajouteApportsTable(renseignements){
                     
     $("#table-content-apports").append
             (`<tr> <td> 
